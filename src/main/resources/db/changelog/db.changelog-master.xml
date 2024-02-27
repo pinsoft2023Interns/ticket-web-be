@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="20240227-create-user-account" author="Tuğçe Usta">
+        <createTable tableName="user_account" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_enum_role" author="yourname">
+        <sql>
+            CREATE TYPE role_enum AS ENUM (
+                'ADMIN',
+                'COMPANY_ADMIN',
+                'COMPANY_USER',
+                'IT_ADMIN'
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
