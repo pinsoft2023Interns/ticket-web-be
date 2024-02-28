@@ -19,10 +19,11 @@ public class BusNavigation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String departurePlace;
     private String arrivalPlace;
     private Date departureDate;
-    private String travelTime;
+    private float travelTime;
 
     @ManyToOne
     @JoinColumn(name = "bus_id")

@@ -17,8 +17,8 @@ public class Station {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "bus_navigation_id")

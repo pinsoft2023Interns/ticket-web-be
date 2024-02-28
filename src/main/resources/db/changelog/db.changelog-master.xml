@@ -47,6 +47,8 @@
             </column>
             <column name="gender" type="gender_enum">
             </column>
+            <column name="company_id" type="bigint">
+            </column>
         </createTable>
     </changeSet>
 
@@ -61,6 +63,128 @@
             <column name="role" value="ADMIN"/>
             <column name="gender" value="FEMALE"/>
         </insert>
+    </changeSet>
+    
+    <changeSet id="20240228-create-ticket" author="Tuğçe Usta">
+        <createTable tableName="ticket" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_ticket_id"/>
+            </column>
+            <column name="seat_info" type="varchar(250)">
+            </column>
+            <column name="is_active" type="boolean">
+            </column>
+            <column name="price" type="float">
+            </column>
+            <column name="user_account_id" type="bigint">
+            </column>
+            <column name="bus_id" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="20240228-create-company" author="Tuğçe Usta">
+        <createTable tableName="company" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_company_id"/>
+            </column>
+            <column name="name" type="varchar(250)">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="20240228-create-coupon" author="Tuğçe Usta">
+        <createTable tableName="coupon" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_coupon_id"/>
+            </column>
+            <column name="user_account_id" type="bigint">
+            </column>
+            <column name="amount" type="float">
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="20240228-create-station" author="Tuğçe Usta">
+        <createTable tableName="station" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_station_id"/>
+            </column>
+            <column name="name" type="varchar(250)">
+                <constraints unique="true"/>
+            </column>
+            <column name="bus_navigation_id" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240228-create-bus_navigation" author="Tuğçe Usta">
+        <createTable tableName="bus_navigation" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_bus_navigation_id"/>
+            </column>
+            <column name="bus_id" type="bigint">
+            </column>
+            <column name="departure_place" type="varchar(250)">
+            </column>
+            <column name="arrival_place" type="varchar(250)">
+            </column>
+            <column name="departure_date" type="date">
+            </column>
+            <column name="travel_time" type="float">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240228-create-bus" author="Tuğçe Usta">
+        <createTable tableName="bus" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_bus_id"/>
+            </column>
+            <column name="plate" type="varchar(250)">
+                <constraints unique="true"/>
+            </column>
+            <column name="driver_name" type="varchar(250)">
+            </column>
+            <column name="host_name" type="varchar(250)">
+            </column>
+            <column name="company_id" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="20240228-add-foreignkeys" author="Tuğçe Usta">
+        <addForeignKeyConstraint baseTableName="ticket"
+                                 baseColumnNames="user_account_id"
+                                 constraintName="fk_ticket_user_account"
+                                 referencedTableName="user_account"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="ticket"
+                                 baseColumnNames="bus_id"
+                                 constraintName="fk_ticket_bus"
+                                 referencedTableName="bus"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="station"
+                                 baseColumnNames="bus_navigation_id"
+                                 constraintName="fk_station_bus_navigation"
+                                 referencedTableName="bus_navigation"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="coupon"
+                                 baseColumnNames="user_account_id"
+                                 constraintName="fk_coupon_user_account"
+                                 referencedTableName="user_account"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="bus_navigation"
+                                 baseColumnNames="bus_id"
+                                 constraintName="fk_bus_navigation_bus"
+                                 referencedTableName="bus"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="bus"
+                                 baseColumnNames="company_id"
+                                 constraintName="fk_bus_company"
+                                 referencedTableName="company"
+                                 referencedColumnNames="id" />
     </changeSet>
 
 

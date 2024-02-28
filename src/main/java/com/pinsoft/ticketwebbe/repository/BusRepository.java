@@ -1,2 +1,10 @@
-package com.pinsoft.ticketwebbe.repository;public interface BusRepository {
+package com.pinsoft.ticketwebbe.repository;
+
+import com.pinsoft.ticketwebbe.entity.Bus;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+
+public interface BusRepository extends JpaRepository<Bus, Long> {
 }

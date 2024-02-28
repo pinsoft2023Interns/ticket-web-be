@@ -20,17 +20,9 @@ public class Bus {
     private Long id;
 
     private String plate;
-
     private String driverName;
     private String hostName;
 
-
-    @ManyToOne
-    @JoinColumn(name = "driver_company_id")
-    private Company companyDriver;
-    @ManyToOne
-    @JoinColumn(name = "host_company_id")
-    private Company companyHost;
     @ManyToOne
     @JoinColumn(name= "company_id")
     private Company companyId;
