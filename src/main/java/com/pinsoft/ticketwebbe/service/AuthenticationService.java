@@ -28,10 +28,13 @@ public class AuthenticationService {
         if(request.getUsername().isEmpty()||request.getEmail().isEmpty()){
             throw new ApiRequestException("username/email cannot be empty!");
         }else{
+            user.setName(request.getName());
+            user.setSurname(request.getSurname());
             user.setUsername(request.getUsername());
             user.setEmail(request.getEmail());
             user.setPassword(request.getPassword());
             user.setRole(request.getRole());
+            user.setGender(request.getGender());
             User savedUser = userRepository.save(user);
             var jwtToken = jwtService.generateToken(savedUser);
             return AuthenticationResponse.builder()

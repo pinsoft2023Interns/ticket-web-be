@@ -36,8 +36,10 @@
             <column name="surname" type="varchar(250)">
             </column>
             <column name="username" type="varchar(250)">
+                <constraints unique="true"/>
             </column>
             <column name="email" type="varchar(250)">
+                <constraints unique="true"/>
             </column>
             <column name="password" type="text">
             </column>
