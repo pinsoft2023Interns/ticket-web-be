@@ -5,14 +5,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="20240227-create-user-account" author="Tuğçe Usta">
-        <createTable tableName="user_account" schemaName="public">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" />
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet id="create_enum_role" author="yourname">
+
+    <changeSet id="20240227-create_enum_role" author="Tuğçe Usta">
         <sql>
             CREATE TYPE role_enum AS ENUM (
                 'ADMIN',
@@ -22,4 +16,50 @@
             );
         </sql>
     </changeSet>
+
+    <changeSet id="20240227-create_enum_gender" author="Tuğçe Usta">
+        <sql>
+            CREATE TYPE gender_enum AS ENUM (
+                'MALE',
+                'FEMALE'
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240227-create-user-account" author="Tuğçe Usta">
+        <createTable tableName="user_account" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_user_account_id"/>
+            </column>
+            <column name="name" type="varchar(250)">
+            </column>
+            <column name="surname" type="varchar(250)">
+            </column>
+            <column name="username" type="varchar(250)">
+            </column>
+            <column name="email" type="varchar(250)">
+            </column>
+            <column name="password" type="text">
+            </column>
+            <column name="role" type="role_enum" >
+            </column>
+            <column name="gender" type="gender_enum">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240228-insert-user_account" author="Tuğçe Usta">
+        <insert tableName="user_account">
+            <column name="id" value="1"/>
+            <column name="name" value="examplename"/>
+            <column name="surname" value="examplesurname"/>
+            <column name="username" value="example"/>
+            <column name="email" value="example@example.com"/>
+            <column name="password" value="example"/>
+            <column name="role" value="ADMIN"/>
+            <column name="gender" value="FEMALE"/>
+        </insert>
+    </changeSet>
+
+
 </databaseChangeLog>

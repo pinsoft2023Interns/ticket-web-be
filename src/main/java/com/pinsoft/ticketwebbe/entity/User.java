@@ -33,7 +33,7 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "gender")
-    private Gender genderEnum;
+    private Gender gender;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "role")

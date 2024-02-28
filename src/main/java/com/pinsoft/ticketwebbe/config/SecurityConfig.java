@@ -11,6 +11,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.pinsoft.ticketwebbe.enums.Permission.ADMIN_DELETE;
+import static com.pinsoft.ticketwebbe.enums.Permission.COMPANY_ADMIN_DELETE;
+import static com.pinsoft.ticketwebbe.enums.Role.ADMIN;
+import static org.springframework.http.HttpMethod.DELETE;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -28,9 +33,16 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers("/swagger-ui/**","/v3/api-docs/**","/register","/authenticate","/**")
                 .permitAll()
-                .requestMatchers(HttpMethod.DELETE).hasAuthority("admin")
+                //TODO authorization
+                //example code for delete end
+                .requestMatchers(DELETE, "/swagger-ui/user/**").hasAnyAuthority(ADMIN_DELETE.name(), COMPANY_ADMIN_DELETE.name())
                 .requestMatchers(HttpMethod.POST).hasAuthority("admin , user")
                 .requestMatchers(HttpMethod.PUT).hasAuthority("admin, user")
+
+                .requestMatchers(DELETE, "/swagger-ui/admin/**").hasAuthority(ADMIN_DELETE.name())
+                .requestMatchers(HttpMethod.POST).hasAuthority("admin , user")
+                .requestMatchers(HttpMethod.PUT).hasAuthority("admin, user")
+
                 .anyRequest()
                 .authenticated()
                 .and()

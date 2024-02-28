@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.pinsoft.ticketwebbe.enums.Role.ADMIN;
+
 @Service
 public class UserService {
     @Autowired
     UserRepository userRepository;
-
     public void delete(Long id) {
         if (userRepository.findById(id).isEmpty()) {
             throw new ApiRequestException("The given id is not exist!");
@@ -22,7 +23,6 @@ public class UserService {
             userRepository.findById(id);
         }
     }
-
     public List<User> getAll() {
         return userRepository.findAll();
     }
