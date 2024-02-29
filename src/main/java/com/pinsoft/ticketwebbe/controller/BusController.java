@@ -28,10 +28,14 @@ public class BusController {
     public void delete(@PathVariable Long id){
         busService.delete(id);
     }
-
+    //TODO
+    /*
+    Change requestbody to BusDto
+     */
     @PostMapping("/buses")
-    public Bus add(@RequestBody Bus bus) throws IOException{
+    public Bus add(@RequestBody Bus bus){
         return busService.save(bus);
     }
+
 
 }
