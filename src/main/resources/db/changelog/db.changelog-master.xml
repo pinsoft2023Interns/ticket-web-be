@@ -200,5 +200,12 @@
                                  referencedColumnNames="id" />
     </changeSet>
 
+    <changeSet id="20240229-add-column-to-ticket" author="Tuğçe Usta">
+        <addColumn tableName="ticket">
+            <column name="is_canceled" type="boolean">
+            </column>
+        </addColumn>
+    </changeSet>
+
 
 </databaseChangeLog>

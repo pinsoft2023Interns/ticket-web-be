@@ -33,10 +33,7 @@ public class BusController {
     public void delete(@PathVariable Long id){
         busService.delete(id);
     }
-    //TODO
-    /*
-    Change requestbody to BusDto
-     */
+
     @PostMapping("/bus")
     public Bus add(@RequestBody BusRequest busRequest){
         Bus bus = new Bus();

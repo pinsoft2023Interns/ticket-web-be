@@ -34,10 +34,7 @@ public class BusNavigationController {
         busNavigationService.delete(id);
     }
 
-    //TODO
-    /*
-    Change requestbody to BusNavigationDto
-     */
+
     @PostMapping("/busnavigation")
     public BusNavigation add(@RequestBody BusNavigationRequest busNavigationRequest) {
         BusNavigation busNavigation = new BusNavigation();

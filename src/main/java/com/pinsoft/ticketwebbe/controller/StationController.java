@@ -34,10 +34,6 @@ public class StationController {
         stationService.delete(id);
     }
 
-    //TODO
-    /*
-    Change requestbody to StationDto
-     */
     @PostMapping("/station")
     public Station add(@RequestBody StationRequest stationRequest) {
         Station station= new Station();

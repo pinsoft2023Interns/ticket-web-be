@@ -18,6 +18,7 @@ public class Ticket {
     private Long id;
     private String seatInfo;
     private boolean isActive;
+    private boolean isCanceled;
     private float price;
 
     @ManyToOne

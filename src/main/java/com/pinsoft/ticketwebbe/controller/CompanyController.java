@@ -29,10 +29,7 @@ public class CompanyController {
         companyService.delete(id);
     }
 
-    //TODO
-    /*
-    Change requestbody to CompanyDto
-     */
+
     @PostMapping("/company")
     public Company add(@RequestBody CompanyRequest companyRequest) {
         Company company = new Company();
