@@ -50,6 +50,7 @@
             <column name="company_id" type="bigint">
             </column>
         </createTable>
+        <addAutoIncrement tableName="user_account" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
     </changeSet>
 
     <changeSet id="20240228-insert-user_account" author="Tuğçe Usta">
@@ -81,6 +82,8 @@
             <column name="bus_id" type="bigint">
             </column>
         </createTable>
+        <addAutoIncrement tableName="ticket" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
     </changeSet>
     
     <changeSet id="20240228-create-company" author="Tuğçe Usta">
@@ -92,6 +95,8 @@
                 <constraints unique="true"/>
             </column>
         </createTable>
+        <addAutoIncrement tableName="company" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
     </changeSet>
     
     <changeSet id="20240228-create-coupon" author="Tuğçe Usta">
@@ -104,6 +109,8 @@
             <column name="amount" type="float">
             </column>
         </createTable>
+        <addAutoIncrement tableName="coupon" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
     </changeSet>
     
     <changeSet id="20240228-create-station" author="Tuğçe Usta">
@@ -117,6 +124,8 @@
             <column name="bus_navigation_id" type="bigint">
             </column>
         </createTable>
+        <addAutoIncrement tableName="station" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
     </changeSet>
 
     <changeSet id="20240228-create-bus_navigation" author="Tuğçe Usta">
@@ -135,6 +144,8 @@
             <column name="travel_time" type="float">
             </column>
         </createTable>
+        <addAutoIncrement tableName="bus_navigation" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
     </changeSet>
 
     <changeSet id="20240228-create-bus" author="Tuğçe Usta">
@@ -152,6 +163,8 @@
             <column name="company_id" type="bigint">
             </column>
         </createTable>
+        <addAutoIncrement tableName="bus" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
     </changeSet>
     
     <changeSet id="20240228-add-foreignkeys" author="Tuğçe Usta">
@@ -185,6 +198,13 @@
                                  constraintName="fk_bus_company"
                                  referencedTableName="company"
                                  referencedColumnNames="id" />
+    </changeSet>
+
+    <changeSet id="20240229-add-column-to-ticket" author="Tuğçe Usta">
+        <addColumn tableName="ticket">
+            <column name="is_canceled" type="boolean">
+            </column>
+        </addColumn>
     </changeSet>
 
 
