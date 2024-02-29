@@ -1,18 +1,23 @@
 package com.pinsoft.ticketwebbe.controller;
 
+import com.pinsoft.ticketwebbe.dto.BusRequest;
 import com.pinsoft.ticketwebbe.entity.Bus;
+import com.pinsoft.ticketwebbe.entity.Company;
 import com.pinsoft.ticketwebbe.service.BusService;
+import com.pinsoft.ticketwebbe.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class BusController {
     @Autowired
     BusService busService;
+
+    @Autowired
+    CompanyService companyService;
 
     @GetMapping("/buses")
     public Collection<Bus> get(){
@@ -32,8 +37,15 @@ public class BusController {
     /*
     Change requestbody to BusDto
      */
-    @PostMapping("/buses")
-    public Bus add(@RequestBody Bus bus){
+    @PostMapping("/bus")
+    public Bus add(@RequestBody BusRequest busRequest){
+        Bus bus = new Bus();
+        bus.setPlate(busRequest.getPlate());
+        bus.setDriverName(busRequest.getDriverName());
+        bus.setHostName(busRequest.getHostName());
+        Company company = companyService.get(busRequest.getCompanyId());
+        bus.setCompanyId(company);
+
         return busService.save(bus);
     }
 

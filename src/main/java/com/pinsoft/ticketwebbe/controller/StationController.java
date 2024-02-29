@@ -1,7 +1,9 @@
 package com.pinsoft.ticketwebbe.controller;
 
+import com.pinsoft.ticketwebbe.dto.StationRequest;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Station;
+import com.pinsoft.ticketwebbe.service.BusNavigationService;
 import com.pinsoft.ticketwebbe.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ public class StationController {
 
     @Autowired
     StationService stationService;
+
+    @Autowired
+    BusNavigationService busNavigationService;
 
     @GetMapping("/station")
     public Collection<Station> get(){
@@ -34,7 +39,12 @@ public class StationController {
     Change requestbody to StationDto
      */
     @PostMapping("/station")
-    public Station add(@RequestBody Station station) {
+    public Station add(@RequestBody StationRequest stationRequest) {
+        Station station= new Station();
+        station.setName(stationRequest.getName());
+        BusNavigation busNavigation = busNavigationService.get(stationRequest.getBusNavigationId());
+        station.setBusNavigations(busNavigation);
+
         return stationService.save(station);
     }
 

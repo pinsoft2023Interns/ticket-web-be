@@ -1,5 +1,6 @@
 package com.pinsoft.ticketwebbe.controller;
 
+import com.pinsoft.ticketwebbe.dto.CompanyRequest;
 import com.pinsoft.ticketwebbe.entity.Company;
 import com.pinsoft.ticketwebbe.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,10 @@ public class CompanyController {
     Change requestbody to CompanyDto
      */
     @PostMapping("/company")
-    public Company add(@RequestBody Company company) {
+    public Company add(@RequestBody CompanyRequest companyRequest) {
+        Company company = new Company();
+        company.setName(companyRequest.getName());
+
         return companyService.save(company);
     }
 }
