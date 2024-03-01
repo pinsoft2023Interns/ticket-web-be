@@ -1,5 +1,6 @@
 package com.pinsoft.ticketwebbe.controller;
 
+import com.pinsoft.ticketwebbe.dto.CouponRequest;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Coupon;
 import com.pinsoft.ticketwebbe.service.CouponService;
@@ -30,13 +31,10 @@ public class CouponController {
         couponService.delete(id);
     }
 
-    //TODO
-    /*
-    Change requestbody to CouponDto
-     */
+
     @PostMapping("/coupon")
-    public Coupon add(@RequestBody Coupon coupon){
-        return couponService.save(coupon);
+    public Coupon add(@RequestBody CouponRequest couponRequest){
+        return couponService.save(couponRequest);
     }
 
 

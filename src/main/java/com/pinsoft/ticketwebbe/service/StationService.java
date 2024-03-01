@@ -1,5 +1,7 @@
 package com.pinsoft.ticketwebbe.service;
 
+import com.pinsoft.ticketwebbe.dto.StationRequest;
+import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Station;
 import com.pinsoft.ticketwebbe.repository.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,20 @@ public class StationService extends AbstractBaseService<Station,Long> {
     @Autowired
     StationRepository stationRepository;
 
+    @Autowired
+    BusNavigationService busNavigationService;
+
     @Override
     protected JpaRepository<Station, Long> getRepository() {
         return stationRepository;
+    }
+
+    public Station save(StationRequest stationRequest){
+        Station station= new Station();
+        station.setName(stationRequest.getName());
+        BusNavigation busNavigation = busNavigationService.get(stationRequest.getBusNavigationId());
+        station.setBusNavigations(busNavigation);
+        return super.save(station);
+
     }
 }

@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.BusRequest;
+import com.pinsoft.ticketwebbe.dto.BusResponse;
 import com.pinsoft.ticketwebbe.entity.Bus;
 import com.pinsoft.ticketwebbe.entity.Company;
 import com.pinsoft.ticketwebbe.service.BusService;
@@ -36,14 +37,7 @@ public class BusController {
 
     @PostMapping("/bus")
     public Bus add(@RequestBody BusRequest busRequest){
-        Bus bus = new Bus();
-        bus.setPlate(busRequest.getPlate());
-        bus.setDriverName(busRequest.getDriverName());
-        bus.setHostName(busRequest.getHostName());
-        Company company = companyService.get(busRequest.getCompanyId());
-        bus.setCompanyId(company);
-
-        return busService.save(bus);
+        return busService.save(busRequest);
     }
 
 

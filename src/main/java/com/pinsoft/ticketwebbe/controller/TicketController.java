@@ -1,10 +1,7 @@
 package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.TicketRequest;
-import com.pinsoft.ticketwebbe.entity.Bus;
-import com.pinsoft.ticketwebbe.entity.Station;
-import com.pinsoft.ticketwebbe.entity.Ticket;
-import com.pinsoft.ticketwebbe.entity.User;
+import com.pinsoft.ticketwebbe.entity.*;
 import com.pinsoft.ticketwebbe.service.BusService;
 import com.pinsoft.ticketwebbe.service.StationService;
 import com.pinsoft.ticketwebbe.service.TicketService;
@@ -20,12 +17,6 @@ public class TicketController {
     @Autowired
     TicketService ticketService;
 
-    @Autowired
-    BusService busService;
-
-    @Autowired
-    UserService userService;
-
     @GetMapping("/ticket")
     public Collection<Ticket> get(){
         return ticketService.listAll();
@@ -33,7 +24,18 @@ public class TicketController {
 
     @GetMapping("/ticket/{id}")
     public Ticket get(@PathVariable Long id){
-        return ticketService.get(id);
+        Ticket ticket = new Ticket();
+        ticket.setBusNavigation(new BusNavigation());
+        ticket.setUser(new User());
+        ticket.setCanceled(false);
+        ticket.setPrice(400);
+        ticket.setActive(true);
+        ticket.setSeatInfo("41");
+        ticket.setId(12L);
+        ticket.getBusNavigation().setBus(new Bus());
+        ticket.getUser().setName("Onur");
+        return ticket;
+        //return ticketService.get(id);
     }
 
     @DeleteMapping("/ticket/{id}")
@@ -43,15 +45,6 @@ public class TicketController {
 
     @PostMapping("/ticket")
     public Ticket add(@RequestBody TicketRequest ticketRequest) {
-        Ticket ticket = new Ticket();
-        ticket.setActive(true);
-        ticket.setCanceled(false);
-        ticket.setPrice(ticketRequest.getPrice());
-        ticket.setSeatInfo(ticketRequest.getSeatInfo());
-        Optional<User> user = userService.getById(ticketRequest.getUserId());
-        ticket.setUser(user.get());
-        Bus bus = busService.get(ticketRequest.getBusId());
-        ticket.setBus(bus);
-        return ticketService.save(ticket);
+        return ticketService.save(ticketRequest);
     }
 }

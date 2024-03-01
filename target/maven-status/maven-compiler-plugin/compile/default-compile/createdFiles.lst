@@ -10,6 +10,7 @@ com\pinsoft\ticketwebbe\service\StationService.class
 com\pinsoft\ticketwebbe\controller\TicketController.class
 com\pinsoft\ticketwebbe\repository\UserRepository.class
 com\pinsoft\ticketwebbe\service\CompanyService.class
+com\pinsoft\ticketwebbe\dto\BusResponse.class
 com\pinsoft\ticketwebbe\dto\AuthenticationResponse.class
 com\pinsoft\ticketwebbe\controller\BusNavigationController.class
 com\pinsoft\ticketwebbe\controller\CouponController.class
@@ -35,6 +36,7 @@ com\pinsoft\ticketwebbe\dto\RegisterRequest$RegisterRequestBuilder.class
 com\pinsoft\ticketwebbe\config\SecurityConfig.class
 com\pinsoft\ticketwebbe\config\MethodSecurityConfig.class
 com\pinsoft\ticketwebbe\config\ApplicationConfig.class
+com\pinsoft\ticketwebbe\dto\CouponRequest.class
 com\pinsoft\ticketwebbe\dto\BusRequest.class
 com\pinsoft\ticketwebbe\repository\CompanyRepository.class
 com\pinsoft\ticketwebbe\repository\TicketRepository.class

@@ -32,9 +32,6 @@ public class CompanyController {
 
     @PostMapping("/company")
     public Company add(@RequestBody CompanyRequest companyRequest) {
-        Company company = new Company();
-        company.setName(companyRequest.getName());
-
-        return companyService.save(company);
+        return companyService.save(companyRequest);
     }
 }

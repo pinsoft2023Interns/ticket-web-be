@@ -36,12 +36,7 @@ public class StationController {
 
     @PostMapping("/station")
     public Station add(@RequestBody StationRequest stationRequest) {
-        Station station= new Station();
-        station.setName(stationRequest.getName());
-        BusNavigation busNavigation = busNavigationService.get(stationRequest.getBusNavigationId());
-        station.setBusNavigations(busNavigation);
-
-        return stationService.save(station);
+        return stationService.save(stationRequest);
     }
 
 }
