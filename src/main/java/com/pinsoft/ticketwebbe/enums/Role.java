@@ -13,22 +13,22 @@ import java.util.stream.Collectors;
 public enum Role {
     ADMIN(
             Set.of(
-                    Permission.ADMIN_READ,
-                    Permission.ADMIN_UPDATE,
-                    Permission.ADMIN_CREATE,
-                    Permission.ADMIN_DELETE
+                    Permission.ADMIN
             )
     ),
     COMPANY_ADMIN(
             Set.of(
-                    Permission.COMPANY_ADMIN_READ,
-                    Permission.COMPANY_ADMIN_UPDATE
+                    Permission.COMPANY_ADMIN
             )
     ),
-    COMPANY_USER(Collections.emptySet()),
+    COMPANY_USER(
+            Set.of(
+                    Permission.COMPANY_USER
+            )
+    ),
     IT_ADMIN(
             Set.of(
-                    Permission.ADMIN_CREATE
+                   Permission.IT_ADMIN
             )
     );
     @Getter
