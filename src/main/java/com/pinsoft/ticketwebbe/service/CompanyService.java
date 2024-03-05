@@ -3,10 +3,13 @@ package com.pinsoft.ticketwebbe.service;
 import com.pinsoft.ticketwebbe.dto.CompanyRequest;
 import com.pinsoft.ticketwebbe.dto.CompanyUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Company;
+import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CompanyService extends AbstractBaseService<Company, Long>{
@@ -25,9 +28,15 @@ public class CompanyService extends AbstractBaseService<Company, Long>{
         return super.save(company);
     }
     public Company update(CompanyUpdateRequest companyUpdateRequest){
-        Company company = companyRepository.getById(companyUpdateRequest.getId());
-        company.setName(companyUpdateRequest.getName());
-        return companyRepository.save(company);
+        Optional<Company> companyRequest = companyRepository.findById(companyUpdateRequest.getId());
+        if(companyRequest.isPresent()){
+            Company company = companyRepository.findById(companyUpdateRequest.getId()).get();
+            company.setName(companyUpdateRequest.getName());
+            return companyRepository.save(company);
+        }else{
+            throw new ApiRequestException("The given id is not exist!");
+        }
+
     }
 
 }

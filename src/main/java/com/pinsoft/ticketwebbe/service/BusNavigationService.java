@@ -4,11 +4,15 @@ import com.pinsoft.ticketwebbe.dto.BusNavigationRequest;
 import com.pinsoft.ticketwebbe.dto.BusNavigationUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Bus;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
+import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.BusNavigationRepository;
+import com.pinsoft.ticketwebbe.repository.BusRepository;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class BusNavigationService extends AbstractBaseService <BusNavigation, Long> {
@@ -19,6 +23,9 @@ public class BusNavigationService extends AbstractBaseService <BusNavigation, Lo
 
     @Autowired
     private BusService busService;
+
+    @Autowired
+    private BusRepository busRepository;
 
     @Override
     protected JpaRepository<BusNavigation, Long> getRepository() {
@@ -31,20 +38,35 @@ public class BusNavigationService extends AbstractBaseService <BusNavigation, Lo
         busNavigation.setDeparturePlace(busNavigationRequest.getDeparturePlace());
         busNavigation.setArrivalPlace(busNavigationRequest.getArrivalPlace());
         busNavigation.setTravelTime(busNavigationRequest.getTravelTime());
-        Bus bus = busService.get(busNavigationRequest.getBusId());
-        busNavigation.setBus(bus);
+        if(busRepository.findById(busNavigationRequest.getBusId()).isPresent()){
+            Bus bus = busService.get(busNavigationRequest.getBusId());
+            busNavigation.setBus(bus);
 
-        return super.save(busNavigation);
+            return super.save(busNavigation);
+        }else{
+            throw new ApiRequestException("Check Bus id again!");
+        }
+
     }
     public BusNavigation update(BusNavigationUpdateRequest busNavigationUpdateRequest){
-        BusNavigation busNavigation = busNavigationRepository.getById(busNavigationUpdateRequest.getId());
-        busNavigation.setDepartureDate(busNavigationUpdateRequest.getDepartureDate());
-        busNavigation.setDeparturePlace(busNavigationUpdateRequest.getDeparturePlace());
-        busNavigation.setArrivalPlace(busNavigationUpdateRequest.getArrivalPlace());
-        busNavigation.setTravelTime(busNavigationUpdateRequest.getTravelTime());
-        Bus bus= busService.get(busNavigationUpdateRequest.getBusId());
-        busNavigation.setBus(bus);
+        Optional<BusNavigation> busNavigationRequest = busNavigationRepository.findById(busNavigationUpdateRequest.getId());
+        if(busNavigationRequest.isPresent()){
+            BusNavigation busNavigation = busNavigationRepository.findById(busNavigationUpdateRequest.getId()).get();
+            busNavigation.setDepartureDate(busNavigationUpdateRequest.getDepartureDate());
+            busNavigation.setDeparturePlace(busNavigationUpdateRequest.getDeparturePlace());
+            busNavigation.setArrivalPlace(busNavigationUpdateRequest.getArrivalPlace());
+            busNavigation.setTravelTime(busNavigationUpdateRequest.getTravelTime());
+            if(busRepository.findById(busNavigationUpdateRequest.getBusId()).isPresent()){
+                Bus bus= busService.get(busNavigationUpdateRequest.getBusId());
+                busNavigation.setBus(bus);
+                return busNavigationRepository.save(busNavigation);
+            }else{
+                throw new ApiRequestException("The bus id is not valid!");
+            }
 
-        return busNavigationRepository.save(busNavigation);
+        }else{
+            throw new ApiRequestException("The given id is not exist!");
+        }
+
     }
 }

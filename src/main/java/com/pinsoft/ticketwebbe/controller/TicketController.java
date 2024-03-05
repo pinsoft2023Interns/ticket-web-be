@@ -25,18 +25,8 @@ public class TicketController {
 
     @GetMapping("/ticket/{id}")
     public Ticket get(@PathVariable Long id){
-        Ticket ticket = new Ticket();
-        ticket.setBusNavigation(new BusNavigation());
-        ticket.setUser(new User());
-        ticket.setCanceled(false);
-        ticket.setPrice(400);
-        ticket.setActive(true);
-        ticket.setSeatInfo("41");
-        ticket.setId(12L);
-        ticket.getBusNavigation().setBus(new Bus());
-        ticket.getUser().setName("Onur");
-        return ticket;
-        //return ticketService.get(id);
+
+        return ticketService.get(id);
     }
 
     @DeleteMapping("/ticket/{id}")
