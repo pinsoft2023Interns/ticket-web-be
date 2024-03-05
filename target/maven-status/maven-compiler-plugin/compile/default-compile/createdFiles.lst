@@ -1,3 +1,4 @@
+com\pinsoft\ticketwebbe\dto\BusNavigationUpdateRequest.class
 com\pinsoft\ticketwebbe\entity\Coupon.class
 com\pinsoft\ticketwebbe\enums\Permission.class
 com\pinsoft\ticketwebbe\dto\StationRequest.class
@@ -10,7 +11,6 @@ com\pinsoft\ticketwebbe\service\StationService.class
 com\pinsoft\ticketwebbe\controller\TicketController.class
 com\pinsoft\ticketwebbe\repository\UserRepository.class
 com\pinsoft\ticketwebbe\service\CompanyService.class
-com\pinsoft\ticketwebbe\dto\BusResponse.class
 com\pinsoft\ticketwebbe\dto\AuthenticationResponse.class
 com\pinsoft\ticketwebbe\controller\BusNavigationController.class
 com\pinsoft\ticketwebbe\controller\CouponController.class
@@ -45,13 +45,18 @@ com\pinsoft\ticketwebbe\repository\BusRepository.class
 com\pinsoft\ticketwebbe\dto\AuthenticationRequest.class
 com\pinsoft\ticketwebbe\dto\RegisterRequest.class
 com\pinsoft\ticketwebbe\service\BusNavigationService.class
+com\pinsoft\ticketwebbe\dto\TicketUpdateRequest.class
 com\pinsoft\ticketwebbe\repository\BusNavigationRepository.class
 com\pinsoft\ticketwebbe\repository\CouponRepository.class
 com\pinsoft\ticketwebbe\service\AuthenticationService.class
 com\pinsoft\ticketwebbe\service\AbstractBaseService.class
+com\pinsoft\ticketwebbe\dto\CouponUpdateRequest.class
 com\pinsoft\ticketwebbe\entity\Company.class
+com\pinsoft\ticketwebbe\dto\CompanyUpdateRequest.class
 com\pinsoft\ticketwebbe\entity\User.class
 com\pinsoft\ticketwebbe\TicketWebBeApplication.class
 com\pinsoft\ticketwebbe\controller\StationController.class
 com\pinsoft\ticketwebbe\repository\StationRepository.class
 com\pinsoft\ticketwebbe\controller\UserController.class
+com\pinsoft\ticketwebbe\dto\BusUpdateRequest.class
+com\pinsoft\ticketwebbe\dto\StationUpdateRequest.class

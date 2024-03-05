@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.BusNavigationRequest;
+import com.pinsoft.ticketwebbe.dto.BusNavigationUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Bus;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.service.BusNavigationService;
@@ -39,6 +40,11 @@ public class BusNavigationController {
     public BusNavigation add(@RequestBody BusNavigationRequest busNavigationRequest) {
 
         return busNavigationService.save(busNavigationRequest);
+    }
+    @PutMapping("/busnavigation/{id}")
+    public BusNavigation update(@RequestBody BusNavigationUpdateRequest busNavigationUpdateRequest){
+
+        return busNavigationService.update(busNavigationUpdateRequest);
     }
 
 

@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.service;
 
 import com.pinsoft.ticketwebbe.dto.StationRequest;
+import com.pinsoft.ticketwebbe.dto.StationUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Station;
 import com.pinsoft.ticketwebbe.repository.StationRepository;
@@ -28,5 +29,13 @@ public class StationService extends AbstractBaseService<Station,Long> {
         station.setBusNavigations(busNavigation);
         return super.save(station);
 
+    }
+
+    public Station update(StationUpdateRequest stationUpdateRequest){
+        Station station = stationRepository.getById(stationUpdateRequest.getId());
+        station.setName(stationUpdateRequest.getName());
+        BusNavigation busNavigation = busNavigationService.get(stationUpdateRequest.getId());
+        station.setBusNavigations(busNavigation);
+        return stationRepository.save(station);
     }
 }

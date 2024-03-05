@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.TicketRequest;
+import com.pinsoft.ticketwebbe.dto.TicketUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.*;
 import com.pinsoft.ticketwebbe.service.BusService;
 import com.pinsoft.ticketwebbe.service.StationService;
@@ -46,5 +47,10 @@ public class TicketController {
     @PostMapping("/ticket")
     public Ticket add(@RequestBody TicketRequest ticketRequest) {
         return ticketService.save(ticketRequest);
+    }
+
+    @PutMapping("/ticket/{id}")
+    public Ticket add(@RequestBody TicketUpdateRequest ticketUpdateRequest){
+        return ticketService.update(ticketUpdateRequest);
     }
 }

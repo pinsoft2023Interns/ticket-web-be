@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.service;
 
 import com.pinsoft.ticketwebbe.dto.BusNavigationRequest;
+import com.pinsoft.ticketwebbe.dto.BusNavigationUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Bus;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.repository.BusNavigationRepository;
@@ -32,6 +33,18 @@ public class BusNavigationService extends AbstractBaseService <BusNavigation, Lo
         busNavigation.setTravelTime(busNavigationRequest.getTravelTime());
         Bus bus = busService.get(busNavigationRequest.getBusId());
         busNavigation.setBus(bus);
+
         return super.save(busNavigation);
+    }
+    public BusNavigation update(BusNavigationUpdateRequest busNavigationUpdateRequest){
+        BusNavigation busNavigation = busNavigationRepository.getById(busNavigationUpdateRequest.getId());
+        busNavigation.setDepartureDate(busNavigationUpdateRequest.getDepartureDate());
+        busNavigation.setDeparturePlace(busNavigationUpdateRequest.getDeparturePlace());
+        busNavigation.setArrivalPlace(busNavigationUpdateRequest.getArrivalPlace());
+        busNavigation.setTravelTime(busNavigationUpdateRequest.getTravelTime());
+        Bus bus= busService.get(busNavigationUpdateRequest.getBusId());
+        busNavigation.setBus(bus);
+
+        return busNavigationRepository.save(busNavigation);
     }
 }

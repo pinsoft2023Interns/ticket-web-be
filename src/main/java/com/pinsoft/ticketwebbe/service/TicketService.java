@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.service;
 
 import com.pinsoft.ticketwebbe.dto.TicketRequest;
+import com.pinsoft.ticketwebbe.dto.TicketUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Bus;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Ticket;
@@ -39,5 +40,17 @@ public class TicketService extends AbstractBaseService<Ticket,Long> {
         BusNavigation busNavigation = busNavigationService.get(ticketRequest.getBusNavigationId());
         ticket.setBusNavigation(busNavigation);
         return super.save(ticket);
+    }
+    public Ticket update(TicketUpdateRequest ticketUpdateRequest){
+        Ticket ticket = ticketRepository.getReferenceById(ticketUpdateRequest.getId());
+        ticket.setPrice(ticketUpdateRequest.getPrice());
+        ticket.setSeatInfo(ticketUpdateRequest.getSeatInfo());
+        ticket.setActive(ticketUpdateRequest.isActive());
+        ticket.setCanceled(ticketUpdateRequest.isCanceled());
+        User user= userService.getById(ticketUpdateRequest.getUserId()).get();
+        ticket.setUser(user);
+        BusNavigation busNavigation= busNavigationService.get(ticketUpdateRequest.getBusNavigationId());
+        ticket.setBusNavigation(busNavigation);
+        return ticketRepository.save(ticket);
     }
 }

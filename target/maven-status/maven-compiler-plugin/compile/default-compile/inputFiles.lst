@@ -1,10 +1,10 @@
-E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\BusResponse.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\CompanyRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\controller\StationController.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\controller\CouponController.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\BusRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\config\JwtAuthenticationFilter.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\exceptions\ApiRequestException.java
+E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\StationUpdateRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\enums\Role.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\config\CorsConfig.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\AuthenticationService.java
@@ -12,15 +12,18 @@ E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\entit
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\repository\CompanyRepository.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\config\ApplicationConfig.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\RegisterRequest.java
+E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\TicketUpdateRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\exceptions\ApiException.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\exceptions\ApiExceptionHandler.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\BusService.java
+E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\BusUpdateRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\repository\StationRepository.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\controller\TicketController.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\controller\CompanyController.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\TicketWebBeApplication.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\enums\Permission.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\BusNavigationRequest.java
+E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\BusNavigationUpdateRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\entity\Ticket.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\CompanyService.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\JwtService.java
@@ -32,6 +35,7 @@ E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\repos
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\UserService.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\repository\CouponRepository.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\entity\Station.java
+E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\CompanyUpdateRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\TicketService.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\config\MethodSecurityConfig.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\CouponRequest.java
@@ -49,5 +53,6 @@ E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\servi
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\AuthenticationResponse.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\AuthenticationRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\controller\BusNavigationController.java
+E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\CouponUpdateRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\BusNavigationService.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\CouponService.java

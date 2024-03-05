@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.service;
 
 import com.pinsoft.ticketwebbe.dto.CouponRequest;
+import com.pinsoft.ticketwebbe.dto.CouponUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Coupon;
 import com.pinsoft.ticketwebbe.entity.User;
 import com.pinsoft.ticketwebbe.repository.CouponRepository;
@@ -28,6 +29,14 @@ public class CouponService extends AbstractBaseService<Coupon,Long> {
         User user = userService.getById(couponRequest.getUserId()).get();
         coupon.setUser(user);
         return super.save(coupon);
+    }
+
+    public Coupon update(CouponUpdateRequest couponUpdateRequest){
+        Coupon coupon = couponRepository.getById(couponUpdateRequest.getId());
+        coupon.setAmount(couponUpdateRequest.getAmount());
+        User user = userService.getById(couponUpdateRequest.getUserId()).get();
+        coupon.setUser(user);
+        return couponRepository.save(coupon);
     }
 
 
