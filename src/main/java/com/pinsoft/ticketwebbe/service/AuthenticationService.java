@@ -4,6 +4,7 @@ import com.pinsoft.ticketwebbe.dto.AuthenticationRequest;
 import com.pinsoft.ticketwebbe.dto.AuthenticationResponse;
 import com.pinsoft.ticketwebbe.dto.RegisterRequest;
 import com.pinsoft.ticketwebbe.entity.User;
+import com.pinsoft.ticketwebbe.enums.Gender;
 import com.pinsoft.ticketwebbe.enums.Role;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
@@ -19,6 +20,8 @@ public class AuthenticationService {
     @Autowired
     private final UserRepository userRepository;
     private Role role;
+    private Gender gender;
+
     private final JwtService jwtService;
 
     private final AuthenticationManager authManager;
@@ -34,7 +37,7 @@ public class AuthenticationService {
             user.setEmail(request.getEmail());
             user.setPassword(request.getPassword());
             user.setRole(request.getRole());
-            user.setGender(request.getGender());
+            user.setGender(Gender.valueOf(request.getGender().toString()));
             User savedUser = userRepository.save(user);
             var jwtToken = jwtService.generateToken(savedUser);
             return AuthenticationResponse.builder()

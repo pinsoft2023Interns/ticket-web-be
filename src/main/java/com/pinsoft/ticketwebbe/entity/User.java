@@ -1,5 +1,6 @@
 package com.pinsoft.ticketwebbe.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pinsoft.ticketwebbe.enums.Gender;
 import com.pinsoft.ticketwebbe.enums.Role;
 import jakarta.persistence.*;
@@ -8,12 +9,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -39,6 +42,17 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "role")
     private Role role;
+
+
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Coupon> coupons;
+
+
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Ticket> tickets;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){

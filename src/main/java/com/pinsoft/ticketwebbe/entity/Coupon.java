@@ -1,5 +1,6 @@
 package com.pinsoft.ticketwebbe.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Coupon {
 
     @ManyToOne
     @JoinColumn(name="user_account_id")
+    @JsonBackReference
     private User user;
 
 }

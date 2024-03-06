@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.StationRequest;
+import com.pinsoft.ticketwebbe.dto.StationUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Station;
 import com.pinsoft.ticketwebbe.service.BusNavigationService;
@@ -36,12 +37,11 @@ public class StationController {
 
     @PostMapping("/station")
     public Station add(@RequestBody StationRequest stationRequest) {
-        Station station= new Station();
-        station.setName(stationRequest.getName());
-        BusNavigation busNavigation = busNavigationService.get(stationRequest.getBusNavigationId());
-        station.setBusNavigations(busNavigation);
-
-        return stationService.save(station);
+        return stationService.save(stationRequest);
+    }
+    @PutMapping("/station/{id}")
+    public Station update(@RequestBody StationUpdateRequest stationUpdateRequest){
+        return stationService.update(stationUpdateRequest);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.pinsoft.ticketwebbe.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,13 +29,14 @@ public class BusNavigation {
 
     @ManyToOne
     @JoinColumn(name = "bus_id")
+    @JsonBackReference
     private Bus bus;
 
     @OneToMany(mappedBy = "id")
-    @JsonIgnore
+    @JsonManagedReference
     private Set<Station> stations;
 
     @OneToMany(mappedBy = "id")
-    @JsonIgnore
+    @JsonManagedReference
     private Set<Ticket> tickets;
 }

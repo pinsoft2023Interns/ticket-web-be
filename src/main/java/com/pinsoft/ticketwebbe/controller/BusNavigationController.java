@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.BusNavigationRequest;
+import com.pinsoft.ticketwebbe.dto.BusNavigationUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Bus;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.service.BusNavigationService;
@@ -37,14 +38,13 @@ public class BusNavigationController {
 
     @PostMapping("/busnavigation")
     public BusNavigation add(@RequestBody BusNavigationRequest busNavigationRequest) {
-        BusNavigation busNavigation = new BusNavigation();
-        busNavigation.setDepartureDate(busNavigationRequest.getDepartureDate());
-        busNavigation.setDeparturePlace(busNavigationRequest.getDeparturePlace());
-        busNavigation.setArrivalPlace(busNavigationRequest.getArrivalPlace());
-        busNavigation.setTravelTime(busNavigationRequest.getTravelTime());
-        Bus bus = busService.get(busNavigationRequest.getBusId());
-        busNavigation.setBus(bus);
-        return busNavigationService.save(busNavigation);
+
+        return busNavigationService.save(busNavigationRequest);
+    }
+    @PutMapping("/busnavigation/{id}")
+    public BusNavigation update(@RequestBody BusNavigationUpdateRequest busNavigationUpdateRequest){
+
+        return busNavigationService.update(busNavigationUpdateRequest);
     }
 
 

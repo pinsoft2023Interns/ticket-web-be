@@ -1,6 +1,7 @@
 package com.pinsoft.ticketwebbe.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class Company {
     private String name;
 
     @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonManagedReference
     private Set<Bus> buses;
 
 

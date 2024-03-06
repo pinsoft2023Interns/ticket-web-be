@@ -11,5 +11,5 @@ public class TicketRequest {
     private String seatInfo;
     private float price;
     private Long userId;
-    private Long busId;
+    private Long busNavigationId;
 }

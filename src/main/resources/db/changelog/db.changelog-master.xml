@@ -207,5 +207,9 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="20240301-change-column-ticket" author="Tuğçe Usta">
+        <renameColumn tableName="ticket" oldColumnName="bus_id" newColumnName="bus_navigation_id"/>
+    </changeSet>
+
 
 </databaseChangeLog>
