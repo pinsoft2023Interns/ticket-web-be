@@ -5,11 +5,9 @@ import com.pinsoft.ticketwebbe.dto.AuthenticationResponse;
 import com.pinsoft.ticketwebbe.dto.RegisterRequest;
 import com.pinsoft.ticketwebbe.entity.User;
 import com.pinsoft.ticketwebbe.enums.Gender;
-import com.pinsoft.ticketwebbe.enums.Role;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -17,10 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    @Autowired
+
     private final UserRepository userRepository;
-    private Role role;
-    private Gender gender;
 
     private final JwtService jwtService;
 
@@ -28,9 +24,9 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         User user = new User();
-        if(request.getUsername().isEmpty()||request.getEmail().isEmpty()){
+        if (request.getUsername().isEmpty() || request.getEmail().isEmpty()) {
             throw new ApiRequestException("username/email cannot be empty!");
-        }else{
+        } else {
             user.setName(request.getName());
             user.setSurname(request.getSurname());
             user.setUsername(request.getUsername());
@@ -44,6 +40,7 @@ public class AuthenticationService {
                     .token(jwtToken).build();
         }
     }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -51,9 +48,9 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user =userRepository.findByUsername(request.getEmail())
+        var email =userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(email);
         return AuthenticationResponse.builder()
                 .token(jwtToken).build();
     }
