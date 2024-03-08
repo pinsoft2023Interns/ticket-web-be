@@ -23,17 +23,22 @@ public class CompanyService extends AbstractBaseService<Company, Long>{
     }
 
     public Company save(CompanyRequest companyRequest){
+
         Company company = new Company();
         company.setName(companyRequest.getName());
+
         return super.save(company);
     }
     public Company update(CompanyUpdateRequest companyUpdateRequest){
         Optional<Company> companyRequest = companyRepository.findById(companyUpdateRequest.getId());
         if(companyRequest.isPresent()){
+
             Company company = companyRepository.findById(companyUpdateRequest.getId()).get();
             company.setName(companyUpdateRequest.getName());
+
             return companyRepository.save(company);
-        }else{
+        }
+        else{
             throw new ApiRequestException("The given id is not exist!");
         }
 

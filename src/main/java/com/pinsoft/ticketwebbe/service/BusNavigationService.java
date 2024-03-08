@@ -38,12 +38,14 @@ public class BusNavigationService extends AbstractBaseService <BusNavigation, Lo
         busNavigation.setDeparturePlace(busNavigationRequest.getDeparturePlace());
         busNavigation.setArrivalPlace(busNavigationRequest.getArrivalPlace());
         busNavigation.setTravelTime(busNavigationRequest.getTravelTime());
+
         if(busRepository.findById(busNavigationRequest.getBusId()).isPresent()){
             Bus bus = busService.get(busNavigationRequest.getBusId());
             busNavigation.setBus(bus);
 
             return super.save(busNavigation);
-        }else{
+        }
+        else{
             throw new ApiRequestException("Check Bus id again!");
         }
 
@@ -56,15 +58,18 @@ public class BusNavigationService extends AbstractBaseService <BusNavigation, Lo
             busNavigation.setDeparturePlace(busNavigationUpdateRequest.getDeparturePlace());
             busNavigation.setArrivalPlace(busNavigationUpdateRequest.getArrivalPlace());
             busNavigation.setTravelTime(busNavigationUpdateRequest.getTravelTime());
+
             if(busRepository.findById(busNavigationUpdateRequest.getBusId()).isPresent()){
                 Bus bus= busService.get(busNavigationUpdateRequest.getBusId());
                 busNavigation.setBus(bus);
                 return busNavigationRepository.save(busNavigation);
-            }else{
+            }
+            else{
                 throw new ApiRequestException("The bus id is not valid!");
             }
 
-        }else{
+        }
+        else{
             throw new ApiRequestException("The given id is not exist!");
         }
 

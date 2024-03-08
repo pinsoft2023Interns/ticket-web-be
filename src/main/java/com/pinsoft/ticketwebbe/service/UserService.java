@@ -4,13 +4,10 @@ import com.pinsoft.ticketwebbe.entity.User;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
-import static com.pinsoft.ticketwebbe.enums.Role.ADMIN;
 
 @Service
 public class UserService {
@@ -19,7 +16,8 @@ public class UserService {
     public void delete(Long id) {
         if (userRepository.findById(id).isEmpty()) {
             throw new ApiRequestException("The given id is not exist!");
-        } else {
+        }
+        else {
             userRepository.findById(id);
         }
     }
@@ -30,7 +28,8 @@ public class UserService {
     public Optional<User> getById(Long id) {
         if (userRepository.findById(id).isEmpty()) {
             throw new ApiRequestException("The given id is not exist!");
-        } else {
+        }
+        else {
             return userRepository.findById(id);
         }
 

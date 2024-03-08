@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class CouponRequest {
     private Long userId;
     private float amount;
-
 }
