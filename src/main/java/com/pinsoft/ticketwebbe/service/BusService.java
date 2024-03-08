@@ -36,6 +36,8 @@ public class BusService extends AbstractBaseService<Bus,Long>{
         bus.setPlate(busRequest.getPlate());
         bus.setDriverName(busRequest.getDriverName());
         bus.setHostName(busRequest.getHostName());
+        bus.setNumberOfSeats(busRequest.getNumberOfSeats());
+
         if(companyRepository.findById(busRequest.getCompanyId()).isPresent()){
             Company company = companyService.get(busRequest.getCompanyId());
             bus.setCompanyId(company);
@@ -53,11 +55,14 @@ public class BusService extends AbstractBaseService<Bus,Long>{
             bus.setPlate(busUpdateRequest.getPlate());
             bus.setDriverName(busUpdateRequest.getDriverName());
             bus.setHostName(busUpdateRequest.getHostName());
+            bus.setNumberOfSeats(busUpdateRequest.getNumberOfSeats());
+
             Company company = companyService.get(busUpdateRequest.getCompanyId());
             bus.setCompanyId(company);
 
             return busRepository.save(bus);
-        }else{
+        }
+        else{
             throw new ApiRequestException("The given id is not exist!");
         }
 
