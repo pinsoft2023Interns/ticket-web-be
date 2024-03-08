@@ -211,12 +211,5 @@
         <renameColumn tableName="ticket" oldColumnName="bus_id" newColumnName="bus_navigation_id"/>
     </changeSet>
 
-    <changeSet id="20240308-add-number-of-seats-to-bus" author="Egemen Derbedek">
-        <addColumn tableName="bus">
-            <column name="number_of_seats" type="INT"/>
-        </addColumn>
-    </changeSet>
-
-
 
 </databaseChangeLog>
