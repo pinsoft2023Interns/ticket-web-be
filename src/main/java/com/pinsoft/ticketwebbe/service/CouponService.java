@@ -32,13 +32,11 @@ public class CouponService extends AbstractBaseService<Coupon,Long> {
     public Coupon save(CouponRequest couponRequest){
         Coupon coupon = new Coupon();
         coupon.setAmount(couponRequest.getAmount());
-
         if(userRepository.findById(couponRequest.getUserId()).isPresent()){
             User user = userService.getById(couponRequest.getUserId()).get();
             coupon.setUser(user);
             return super.save(coupon);
-        }
-        else {
+        }else {
             throw new ApiRequestException("Check user id again!");
         }
 
@@ -49,17 +47,14 @@ public class CouponService extends AbstractBaseService<Coupon,Long> {
         if(couponRequest.isPresent()){
             Coupon coupon = couponRepository.findById(couponUpdateRequest.getId()).get();
             coupon.setAmount(couponUpdateRequest.getAmount());
-
             if(userRepository.findById(couponUpdateRequest.getUserId()).isPresent()){
                 User user = userService.getById(couponUpdateRequest.getUserId()).get();
                 coupon.setUser(user);
                 return couponRepository.save(coupon);
-            }
-            else{
+            }else{
                 throw new ApiRequestException("The user id is not valid!");
             }
-        }
-        else{
+        }else{
             throw new ApiRequestException("The given id is not exist!");
         }
 

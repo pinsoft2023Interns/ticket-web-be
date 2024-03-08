@@ -20,10 +20,8 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     UserService userService;
-
     @Autowired
     private AuthenticationService authService;
-
     @PostMapping("/register")
     @PermitAll
     public ResponseEntity<AuthenticationResponse> register(
@@ -39,19 +37,16 @@ public class UserController {
     ){
         return ResponseEntity.ok(authService.authenticate(request));
     }
-
     @GetMapping("/user_account")
     public Collection<User> get(){
         return userService.getAll();
     }
-
     @GetMapping("/user_account/{id}")
     public User get(@PathVariable Long id){
         Optional<User> optional = userService.getById(id);
         if(optional.isPresent()){
             return optional.get();
-        }
-        else{
+        }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }

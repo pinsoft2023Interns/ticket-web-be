@@ -2,6 +2,7 @@ package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.StationRequest;
 import com.pinsoft.ticketwebbe.dto.StationUpdateRequest;
+import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Station;
 import com.pinsoft.ticketwebbe.service.BusNavigationService;
 import com.pinsoft.ticketwebbe.service.StationService;

@@ -2,11 +2,14 @@ package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.BusNavigationRequest;
 import com.pinsoft.ticketwebbe.dto.BusNavigationUpdateRequest;
+import com.pinsoft.ticketwebbe.entity.Bus;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.service.BusNavigationService;
 import com.pinsoft.ticketwebbe.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 import java.util.Collection;
 
 @RestController
@@ -38,7 +41,6 @@ public class BusNavigationController {
 
         return busNavigationService.save(busNavigationRequest);
     }
-
     @PutMapping("/busnavigation/{id}")
     public BusNavigation update(@RequestBody BusNavigationUpdateRequest busNavigationUpdateRequest){
 
