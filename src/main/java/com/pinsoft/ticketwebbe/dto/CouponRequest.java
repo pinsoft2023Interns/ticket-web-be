@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponRequest {
+
     private Long userId;
+
     private float amount;
 
 }
