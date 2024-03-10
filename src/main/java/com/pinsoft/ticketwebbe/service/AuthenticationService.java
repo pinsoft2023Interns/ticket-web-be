@@ -8,6 +8,7 @@ import com.pinsoft.ticketwebbe.enums.Gender;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private final JwtService jwtService;
 
@@ -44,13 +46,13 @@ public class AuthenticationService {
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        request.getUsername(),
                         request.getPassword()
                 )
         );
-        var email =userRepository.findByEmail(request.getEmail())
+        var user =userRepository.findByUsername(request.getUsername())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken(email);
+        var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken).build();
     }

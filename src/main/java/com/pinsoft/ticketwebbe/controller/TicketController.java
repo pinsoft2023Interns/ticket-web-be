@@ -5,6 +5,7 @@ import com.pinsoft.ticketwebbe.dto.TicketUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.*;
 import com.pinsoft.ticketwebbe.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -16,6 +17,7 @@ public class TicketController {
     TicketService ticketService;
 
     @GetMapping("/ticket")
+    @PreAuthorize("hasRole('ADMIN')")
     public Collection<Ticket> get(){
         return ticketService.listAll();
     }
