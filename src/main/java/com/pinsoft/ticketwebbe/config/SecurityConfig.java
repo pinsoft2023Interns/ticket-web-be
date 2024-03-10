@@ -34,14 +34,14 @@ public class SecurityConfig {
                 .permitAll()
                 //TODO authorization
                 //example code for delete end
-                .requestMatchers(DELETE, "/swagger-ui/user/**").hasAnyAuthority(ADMIN.name(), COMPANY_ADMIN.name())
+                /*.requestMatchers(DELETE, "/swagger-ui/user/**").hasAnyAuthority(ADMIN.name(), COMPANY_ADMIN.name())
                 .requestMatchers(HttpMethod.POST).hasAuthority("admin , user")
                 .requestMatchers(HttpMethod.PUT).hasAuthority("admin, user")
 
                 .requestMatchers(DELETE, "/swagger-ui/admin/**").hasAuthority(ADMIN.name())
                 .requestMatchers(HttpMethod.POST).hasAuthority("admin , user")
                 .requestMatchers(HttpMethod.PUT).hasAuthority("admin, user")
-
+                */
                 .anyRequest()
                 .authenticated()
                 .and()
