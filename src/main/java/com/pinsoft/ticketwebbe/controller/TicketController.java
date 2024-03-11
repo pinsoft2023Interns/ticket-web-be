@@ -12,12 +12,12 @@ import java.util.Collection;
 
 
 @RestController
+@PreAuthorize("hasAnyRole('ADMIN', 'COMPANY_ADMIN')")
 public class TicketController {
     @Autowired
     TicketService ticketService;
 
     @GetMapping("/ticket")
-    @PreAuthorize("hasRole('ADMIN')")
     public Collection<Ticket> get(){
         return ticketService.listAll();
     }
@@ -39,6 +39,7 @@ public class TicketController {
     }
 
     @PutMapping("/ticket/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'COMPANY_ADMIN' ,'COMPANY_USER')")
     public Ticket add(@RequestBody TicketUpdateRequest ticketUpdateRequest){
         return ticketService.update(ticketUpdateRequest);
     }

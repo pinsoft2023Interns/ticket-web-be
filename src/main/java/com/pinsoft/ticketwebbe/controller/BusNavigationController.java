@@ -7,12 +7,14 @@ import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.service.BusNavigationService;
 import com.pinsoft.ticketwebbe.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Collection;
 
 @RestController
+@PreAuthorize("hasAnyRole('ADMIN', 'COMPANY_ADMIN')")
 public class BusNavigationController {
     @Autowired
     BusNavigationService busNavigationService;

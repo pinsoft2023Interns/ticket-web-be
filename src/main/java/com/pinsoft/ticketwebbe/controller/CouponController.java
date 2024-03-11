@@ -7,12 +7,14 @@ import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Coupon;
 import com.pinsoft.ticketwebbe.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Collection;
 
 @RestController
+@PreAuthorize("hasAnyRole('ADMIN', 'COMPANY_ADMIN', 'COMPANY_USER')")
 public class CouponController {
 
     @Autowired

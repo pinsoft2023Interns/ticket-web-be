@@ -5,12 +5,14 @@ import com.pinsoft.ticketwebbe.dto.CompanyUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Company;
 import com.pinsoft.ticketwebbe.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Collection;
 
 @RestController
+@PreAuthorize("hasRole('ADMIN')")
 public class CompanyController {
     @Autowired
     CompanyService companyService;
