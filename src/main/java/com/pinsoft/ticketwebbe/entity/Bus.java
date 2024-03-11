@@ -23,7 +23,7 @@ public class Bus {
     private String plate;
     private String driverName;
     private String hostName;
-    private int numberOfSeats;
+    private Integer numberOfSeats;
 
     @ManyToOne
     @JoinColumn(name= "company_id")
