@@ -31,11 +31,11 @@ public class BusNavigation {
     @JsonBackReference
     private Bus bus;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "busNavigations",fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Station> stations;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "busNavigation")
     @JsonManagedReference
     private Set<Ticket> tickets;
 }

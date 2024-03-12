@@ -22,7 +22,7 @@ public class Company {
 
     private String name;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "companyId", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Bus> buses;
 
