@@ -3,6 +3,7 @@ package com.pinsoft.ticketwebbe.controller;
 import com.pinsoft.ticketwebbe.dto.AuthenticationRequest;
 import com.pinsoft.ticketwebbe.dto.AuthenticationResponse;
 import com.pinsoft.ticketwebbe.dto.RegisterRequest;
+import com.pinsoft.ticketwebbe.dto.UserUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.User;
 import com.pinsoft.ticketwebbe.service.AuthenticationService;
 import com.pinsoft.ticketwebbe.service.UserService;
@@ -55,6 +56,10 @@ public class UserController {
         else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+    @PutMapping("/user_account/{id}")
+    public User update(@RequestBody UserUpdateRequest userUpdateRequest){
+        return userService.update(userUpdateRequest);
     }
 
 }

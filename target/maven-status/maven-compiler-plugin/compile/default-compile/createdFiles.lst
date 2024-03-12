@@ -47,6 +47,7 @@ com\pinsoft\ticketwebbe\dto\RegisterRequest.class
 com\pinsoft\ticketwebbe\service\BusNavigationService.class
 com\pinsoft\ticketwebbe\dto\TicketUpdateRequest.class
 com\pinsoft\ticketwebbe\repository\BusNavigationRepository.class
+com\pinsoft\ticketwebbe\dto\UserUpdateRequest.class
 com\pinsoft\ticketwebbe\repository\CouponRepository.class
 com\pinsoft\ticketwebbe\service\AuthenticationService.class
 com\pinsoft\ticketwebbe\service\AbstractBaseService.class

@@ -36,6 +36,7 @@ E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\servi
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\repository\CouponRepository.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\entity\Station.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\CompanyUpdateRequest.java
+E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\UserUpdateRequest.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\service\TicketService.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\config\MethodSecurityConfig.java
 E:\DEVELOPMENT\pinsoft\ticket-web-be\src\main\java\com\pinsoft\ticketwebbe\dto\CouponRequest.java
