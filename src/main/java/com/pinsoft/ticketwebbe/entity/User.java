@@ -40,12 +40,12 @@ public class User implements UserDetails {
     private Role role;
 
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Coupon> coupons;
 
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Ticket> tickets;
 

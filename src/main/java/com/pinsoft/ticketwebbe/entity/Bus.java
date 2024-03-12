@@ -30,7 +30,7 @@ public class Bus {
     @JsonBackReference
     private Company companyId;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bus", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<BusNavigation> busNavigation;
 
