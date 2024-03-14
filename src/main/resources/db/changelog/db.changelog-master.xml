@@ -217,4 +217,56 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="20240313-drop-columns-bus_navigation" author="Tuğçe Usta">
+        <dropColumn tableName="bus_navigation" columnName="departure_place"/>
+        <dropColumn tableName="bus_navigation" columnName="arrival_place"/>
+        <dropColumn tableName="bus_navigation" columnName="departure_date"/>
+        <dropColumn tableName="bus_navigation" columnName="travel_time"/>
+    </changeSet>
+    
+    <changeSet id="20240314-drop-station-column" author="Tuğçe Usta">
+        <dropColumn tableName="station" columnName="bus_navigation_id"/>
+    </changeSet>
+
+    <changeSet id="20240314-create-bus_nav_station" author="Tuğçe Usta">
+        <createTable tableName="bus_nav_station" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="pk_bus_nav_station_id" primaryKey="true"/>
+            </column>
+            <column name="order" type="int">
+            </column>
+            <column name="arrival_date" type="date">
+            </column>
+            <column name="departure_date" type="date">
+            </column>
+            <column name="bus_navigation_id" type="bigint">
+            </column>
+            <column name="station_id" type="bigint">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="bus_nav_station"
+                                 baseColumnNames="bus_navigation_id"
+                                 constraintName="fk_bus_nav_station_bus_navigation"
+                                 referencedTableName="bus_navigation"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="bus_nav_station"
+                                 baseColumnNames="station_id"
+                                 constraintName="fk_bus_nav_station_station"
+                                 referencedTableName="station"
+                                 referencedColumnNames="id"/>
+        <addAutoIncrement tableName="bus_nav_station" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="20240314-rename-ticket-column-name" author="Tuğçe Usta">
+        <addColumn tableName="ticket">
+            <column name="bus_nav_station_id" type="bigint">
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="ticket"
+                                 baseColumnNames="bus_nav_station_id"
+                                 constraintName="fk_bus_nav_station_ticket"
+                                 referencedTableName="ticket"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
 </databaseChangeLog>

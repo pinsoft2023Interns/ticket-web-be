@@ -11,6 +11,7 @@ com\pinsoft\ticketwebbe\service\StationService.class
 com\pinsoft\ticketwebbe\controller\TicketController.class
 com\pinsoft\ticketwebbe\repository\UserRepository.class
 com\pinsoft\ticketwebbe\service\CompanyService.class
+com\pinsoft\ticketwebbe\dto\BusNavStationRequest.class
 com\pinsoft\ticketwebbe\dto\AuthenticationResponse.class
 com\pinsoft\ticketwebbe\controller\BusNavigationController.class
 com\pinsoft\ticketwebbe\controller\CouponController.class
@@ -18,7 +19,9 @@ com\pinsoft\ticketwebbe\exceptions\ApiRequestException.class
 com\pinsoft\ticketwebbe\entity\Bus.class
 com\pinsoft\ticketwebbe\config\CorsConfig.class
 com\pinsoft\ticketwebbe\enums\Role.class
+com\pinsoft\ticketwebbe\controller\BusNavStationController.class
 com\pinsoft\ticketwebbe\entity\BusNavigation.class
+com\pinsoft\ticketwebbe\entity\BusNavStation.class
 com\pinsoft\ticketwebbe\entity\Station.class
 com\pinsoft\ticketwebbe\exceptions\ApiException.class
 com\pinsoft\ticketwebbe\entity\Ticket.class
@@ -29,6 +32,7 @@ com\pinsoft\ticketwebbe\service\CouponService.class
 com\pinsoft\ticketwebbe\dto\BusNavigationRequest.class
 com\pinsoft\ticketwebbe\dto\TicketRequest.class
 com\pinsoft\ticketwebbe\config\JwtAuthenticationFilter.class
+com\pinsoft\ticketwebbe\service\BusNavStationService.class
 com\pinsoft\ticketwebbe\service\UserService.class
 com\pinsoft\ticketwebbe\dto\AuthenticationRequest$AuthenticationRequestBuilder.class
 com\pinsoft\ticketwebbe\dto\AuthenticationResponse$AuthenticationResponseBuilder.class
@@ -39,6 +43,7 @@ com\pinsoft\ticketwebbe\config\ApplicationConfig.class
 com\pinsoft\ticketwebbe\dto\CouponRequest.class
 com\pinsoft\ticketwebbe\dto\BusRequest.class
 com\pinsoft\ticketwebbe\repository\CompanyRepository.class
+com\pinsoft\ticketwebbe\repository\BusNavStationRepository.class
 com\pinsoft\ticketwebbe\repository\TicketRepository.class
 com\pinsoft\ticketwebbe\service\TicketService.class
 com\pinsoft\ticketwebbe\repository\BusRepository.class
@@ -47,6 +52,7 @@ com\pinsoft\ticketwebbe\dto\RegisterRequest.class
 com\pinsoft\ticketwebbe\service\BusNavigationService.class
 com\pinsoft\ticketwebbe\dto\TicketUpdateRequest.class
 com\pinsoft\ticketwebbe\repository\BusNavigationRepository.class
+com\pinsoft\ticketwebbe\dto\UserUpdateRequest.class
 com\pinsoft\ticketwebbe\repository\CouponRepository.class
 com\pinsoft\ticketwebbe\service\AuthenticationService.class
 com\pinsoft\ticketwebbe\service\AbstractBaseService.class
