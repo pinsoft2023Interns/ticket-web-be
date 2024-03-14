@@ -40,7 +40,7 @@ public class BusNavStationService extends AbstractBaseService<BusNavStation,Long
 
     public BusNavStation save(BusNavStationRequest busNavStationRequest){
         BusNavStation busNavStation = new BusNavStation();
-        busNavStation.setOrder(busNavStationRequest.getOrder());
+        busNavStation.setStationOrder(busNavStationRequest.getStationOrder());
         busNavStation.setArrivalDate(busNavStationRequest.getArrivalDate());
         busNavStation.setDepartureDate(busNavStationRequest.getDepartureDate());
         if(stationRepository.findById(busNavStationRequest.getStationId()).isPresent() &&
@@ -56,8 +56,5 @@ public class BusNavStationService extends AbstractBaseService<BusNavStation,Long
             throw new ApiRequestException("Check BusNavigation id and station id again!");
         }
     }
-    /*
-    return route,
-    POST: save(),update()
-     */
+
 }

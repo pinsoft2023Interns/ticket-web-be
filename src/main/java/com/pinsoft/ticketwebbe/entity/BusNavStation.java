@@ -21,7 +21,7 @@ public class BusNavStation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int order;
+    private int stationOrder;
 
     private Date arrivalDate;
 

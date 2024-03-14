@@ -29,4 +29,8 @@ public class BusNavigation {
     @OneToMany(mappedBy = "busNavigation")
     @JsonManagedReference
     private Set<Ticket> tickets;
+
+    @OneToMany
+    @JsonManagedReference
+    private Set<BusNavStation> busNavStation;
 }

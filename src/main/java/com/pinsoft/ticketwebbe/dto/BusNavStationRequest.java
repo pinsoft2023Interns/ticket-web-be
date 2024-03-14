@@ -10,7 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BusNavStationRequest {
-    private int order;
+
+    private int stationOrder;
+
     private Date arrivalDate;
 
     private Date departureDate;

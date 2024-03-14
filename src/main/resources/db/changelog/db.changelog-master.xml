@@ -233,7 +233,7 @@
             <column name="id" type="bigint">
                 <constraints primaryKeyName="pk_bus_nav_station_id" primaryKey="true"/>
             </column>
-            <column name="order" type="int">
+            <column name="station_order" type="int">
             </column>
             <column name="arrival_date" type="date">
             </column>

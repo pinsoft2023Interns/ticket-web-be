@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class StationUpdateRequest {
     private Long id;
     private String name;
-    private Long busNavigationId;
 }
