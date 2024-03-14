@@ -21,21 +21,16 @@ public class BusNavigation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String departurePlace;
-    private String arrivalPlace;
-    private Date departureDate;
-    private float travelTime;
-
     @ManyToOne
     @JoinColumn(name = "bus_id")
     @JsonBackReference
     private Bus bus;
 
-    @OneToMany(mappedBy = "busNavigations",fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Set<Station> stations;
-
     @OneToMany(mappedBy = "busNavigation")
     @JsonManagedReference
     private Set<Ticket> tickets;
+
+    @OneToMany
+    @JsonManagedReference
+    private Set<BusNavStation> busNavStation;
 }

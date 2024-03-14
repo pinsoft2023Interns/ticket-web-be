@@ -34,11 +34,6 @@ public class BusNavigationService extends AbstractBaseService <BusNavigation, Lo
 
     public BusNavigation save(BusNavigationRequest busNavigationRequest){
         BusNavigation busNavigation = new BusNavigation();
-        busNavigation.setDepartureDate(busNavigationRequest.getDepartureDate());
-        busNavigation.setDeparturePlace(busNavigationRequest.getDeparturePlace());
-        busNavigation.setArrivalPlace(busNavigationRequest.getArrivalPlace());
-        busNavigation.setTravelTime(busNavigationRequest.getTravelTime());
-
         if(busRepository.findById(busNavigationRequest.getBusId()).isPresent()){
             Bus bus = busService.get(busNavigationRequest.getBusId());
             busNavigation.setBus(bus);
@@ -55,11 +50,6 @@ public class BusNavigationService extends AbstractBaseService <BusNavigation, Lo
 
         if(busNavigationRequest.isPresent()){
             BusNavigation busNavigation = busNavigationRepository.findById(busNavigationUpdateRequest.getId()).get();
-            busNavigation.setDepartureDate(busNavigationUpdateRequest.getDepartureDate());
-            busNavigation.setDeparturePlace(busNavigationUpdateRequest.getDeparturePlace());
-            busNavigation.setArrivalPlace(busNavigationUpdateRequest.getArrivalPlace());
-            busNavigation.setTravelTime(busNavigationUpdateRequest.getTravelTime());
-
             if(busRepository.findById(busNavigationUpdateRequest.getBusId()).isPresent()){
                 Bus bus= busService.get(busNavigationUpdateRequest.getBusId());
                 busNavigation.setBus(bus);
@@ -68,7 +58,6 @@ public class BusNavigationService extends AbstractBaseService <BusNavigation, Lo
             else{
                 throw new ApiRequestException("The bus id is not valid!");
             }
-
         }
         else{
             throw new ApiRequestException("The given id is not exist!");

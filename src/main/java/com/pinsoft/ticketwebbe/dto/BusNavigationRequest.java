@@ -10,9 +10,5 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BusNavigationRequest {
-    private String departurePlace;
-    private String arrivalPlace;
-    private Date departureDate;
-    private float travelTime;
     private Long busId;
 }

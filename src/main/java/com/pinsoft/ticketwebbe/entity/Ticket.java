@@ -27,10 +27,13 @@ public class Ticket {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name= "bus_navigation_id")
+    @JoinColumn(name = "bus_navigation_id")
     @JsonBackReference
     private BusNavigation busNavigation;
 
-
+    @ManyToOne
+    @JoinColumn(name = "bus_nav_station_id")
+    @JsonBackReference
+    private BusNavStation busNavStation;
 
 }

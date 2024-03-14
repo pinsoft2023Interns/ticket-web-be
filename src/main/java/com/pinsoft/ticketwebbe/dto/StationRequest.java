@@ -9,5 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StationRequest {
     private String name;
-    private Long busNavigationId;
 }
