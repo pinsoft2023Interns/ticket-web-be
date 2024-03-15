@@ -1,5 +1,6 @@
 package com.pinsoft.ticketwebbe.service;
 
+import com.pinsoft.ticketwebbe.dto.UserUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.User;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
@@ -34,5 +35,22 @@ public class UserService {
             return userRepository.findById(id);
         }
 
+    }
+    public User update(UserUpdateRequest userUpdateRequest)  {
+        Optional<User> user = userRepository.findById(userUpdateRequest.getId());
+        if(user.isPresent()){
+            user.get().setUsername(userUpdateRequest.getUsername());
+            user.get().setName(userUpdateRequest.getName());
+            user.get().setSurname(userUpdateRequest.getSurname());
+            user.get().setEmail(userUpdateRequest.getEmail());
+            user.get().setPassword(userUpdateRequest.getPassword());
+            user.get().setRole(userUpdateRequest.getRole());
+            user.get().setGender(userUpdateRequest.getGender());
+
+            return userRepository.save(user.get());
+        }
+        else {
+            throw new ApiRequestException("User id not exist!");
+        }
     }
 }
