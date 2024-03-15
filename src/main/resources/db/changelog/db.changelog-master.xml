@@ -269,4 +269,48 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="20240311-insert-user_account" author="Tuğçe Usta">
+        <insert tableName="user_account">
+            <column name="id" value="2"/>
+            <column name="name" value="admin"/>
+            <column name="surname" value="admin"/>
+            <column name="username" value="admin"/>
+            <column name="email" value="admin@admin.com"/>
+            <column name="password" value="admin"/>
+            <column name="role" value="ADMIN"/>
+            <column name="gender" value="FEMALE"/>
+        </insert>
+        <insert tableName="user_account">
+            <column name="id" value="3"/>
+            <column name="name" value="companyadmin"/>
+            <column name="surname" value="companyadmin"/>
+            <column name="username" value="companyadmin"/>
+            <column name="email" value="companyadmin@companyadmin.com"/>
+            <column name="password" value="companyadmin"/>
+            <column name="role" value="COMPANY_ADMIN"/>
+            <column name="gender" value="MALE"/>
+        </insert>
+        <insert tableName="user_account">
+            <column name="id" value="4"/>
+            <column name="name" value="itadmin"/>
+            <column name="surname" value="itadmin"/>
+            <column name="username" value="itadmin"/>
+            <column name="email" value="itadmin@itadmin.com"/>
+            <column name="password" value="itadmin"/>
+            <column name="role" value="IT_ADMIN"/>
+            <column name="gender" value="FEMALE"/>
+        </insert>
+        <insert tableName="user_account">
+            <column name="id" value="5"/>
+            <column name="name" value="companyuser"/>
+            <column name="surname" value="companyuser"/>
+            <column name="username" value="companyuser"/>
+            <column name="email" value="companyuser@companyuser.com"/>
+            <column name="password" value="companyuser"/>
+            <column name="role" value="COMPANY_USER"/>
+            <column name="gender" value="FEMALE"/>
+        </insert>
+    </changeSet>
+
+
 </databaseChangeLog>
