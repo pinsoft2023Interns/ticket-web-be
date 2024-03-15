@@ -30,7 +30,7 @@ public class BusNavigation {
     @JsonManagedReference
     private Set<Ticket> tickets;
 
-    @OneToMany
+    @OneToMany(mappedBy = "busNavigation")
     @JsonManagedReference
     private Set<BusNavStation> busNavStation;
 }
