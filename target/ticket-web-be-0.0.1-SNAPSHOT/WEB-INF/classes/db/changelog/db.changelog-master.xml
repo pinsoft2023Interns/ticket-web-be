@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="20240227-create_enum_role" author="Tuğçe Usta">
+        <sql>
+            CREATE TYPE role_enum AS ENUM (
+                'ADMIN',
+                'COMPANY_ADMIN',
+                'COMPANY_USER',
+                'IT_ADMIN'
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240227-create_enum_gender" author="Tuğçe Usta">
+        <sql>
+            CREATE TYPE gender_enum AS ENUM (
+                'MALE',
+                'FEMALE'
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="20240227-create-user-account" author="Tuğçe Usta">
+        <createTable tableName="user_account" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_user_account_id"/>
+            </column>
+            <column name="name" type="varchar(250)">
+            </column>
+            <column name="surname" type="varchar(250)">
+            </column>
+            <column name="username" type="varchar(250)">
+                <constraints unique="true"/>
+            </column>
+            <column name="email" type="varchar(250)">
+                <constraints unique="true"/>
+            </column>
+            <column name="password" type="text">
+            </column>
+            <column name="role" type="role_enum" >
+            </column>
+            <column name="gender" type="gender_enum">
+            </column>
+            <column name="company_id" type="bigint">
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="user_account" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="20240228-insert-user_account" author="Tuğçe Usta">
+        <insert tableName="user_account">
+            <column name="id" value="1"/>
+            <column name="name" value="examplename"/>
+            <column name="surname" value="examplesurname"/>
+            <column name="username" value="example"/>
+            <column name="email" value="example@example.com"/>
+            <column name="password" value="example"/>
+            <column name="role" value="ADMIN"/>
+            <column name="gender" value="FEMALE"/>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="20240228-create-ticket" author="Tuğçe Usta">
+        <createTable tableName="ticket" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_ticket_id"/>
+            </column>
+            <column name="seat_info" type="varchar(250)">
+            </column>
+            <column name="is_active" type="boolean">
+            </column>
+            <column name="price" type="float">
+            </column>
+            <column name="user_account_id" type="bigint">
+            </column>
+            <column name="bus_id" type="bigint">
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="ticket" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
+    </changeSet>
+    
+    <changeSet id="20240228-create-company" author="Tuğçe Usta">
+        <createTable tableName="company" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_company_id"/>
+            </column>
+            <column name="name" type="varchar(250)">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="company" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
+    </changeSet>
+    
+    <changeSet id="20240228-create-coupon" author="Tuğçe Usta">
+        <createTable tableName="coupon" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_coupon_id"/>
+            </column>
+            <column name="user_account_id" type="bigint">
+            </column>
+            <column name="amount" type="float">
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="coupon" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
+    </changeSet>
+    
+    <changeSet id="20240228-create-station" author="Tuğçe Usta">
+        <createTable tableName="station" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_station_id"/>
+            </column>
+            <column name="name" type="varchar(250)">
+                <constraints unique="true"/>
+            </column>
+            <column name="bus_navigation_id" type="bigint">
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="station" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
+    </changeSet>
+
+    <changeSet id="20240228-create-bus_navigation" author="Tuğçe Usta">
+        <createTable tableName="bus_navigation" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_bus_navigation_id"/>
+            </column>
+            <column name="bus_id" type="bigint">
+            </column>
+            <column name="departure_place" type="varchar(250)">
+            </column>
+            <column name="arrival_place" type="varchar(250)">
+            </column>
+            <column name="departure_date" type="date">
+            </column>
+            <column name="travel_time" type="float">
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="bus_navigation" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
+    </changeSet>
+
+    <changeSet id="20240228-create-bus" author="Tuğçe Usta">
+        <createTable tableName="bus" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_bus_id"/>
+            </column>
+            <column name="plate" type="varchar(250)">
+                <constraints unique="true"/>
+            </column>
+            <column name="driver_name" type="varchar(250)">
+            </column>
+            <column name="host_name" type="varchar(250)">
+            </column>
+            <column name="company_id" type="bigint">
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="bus" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+
+    </changeSet>
+    
+    <changeSet id="20240228-add-foreignkeys" author="Tuğçe Usta">
+        <addForeignKeyConstraint baseTableName="ticket"
+                                 baseColumnNames="user_account_id"
+                                 constraintName="fk_ticket_user_account"
+                                 referencedTableName="user_account"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="ticket"
+                                 baseColumnNames="bus_id"
+                                 constraintName="fk_ticket_bus"
+                                 referencedTableName="bus"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="station"
+                                 baseColumnNames="bus_navigation_id"
+                                 constraintName="fk_station_bus_navigation"
+                                 referencedTableName="bus_navigation"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="coupon"
+                                 baseColumnNames="user_account_id"
+                                 constraintName="fk_coupon_user_account"
+                                 referencedTableName="user_account"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="bus_navigation"
+                                 baseColumnNames="bus_id"
+                                 constraintName="fk_bus_navigation_bus"
+                                 referencedTableName="bus"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="bus"
+                                 baseColumnNames="company_id"
+                                 constraintName="fk_bus_company"
+                                 referencedTableName="company"
+                                 referencedColumnNames="id" />
+    </changeSet>
+
+    <changeSet id="20240229-add-column-to-ticket" author="Tuğçe Usta">
+        <addColumn tableName="ticket">
+            <column name="is_canceled" type="boolean">
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20240301-change-column-ticket" author="Tuğçe Usta">
+        <renameColumn tableName="ticket" oldColumnName="bus_id" newColumnName="bus_navigation_id"/>
+    </changeSet>
+
+    <changeSet id="20240308-add-number-of-seats-to-bus" author="Egemen Derbedek">
+        <addColumn tableName="bus">
+            <column name="number_of_seats" type="INT"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20240313-drop-columns-bus_navigation" author="Tuğçe Usta">
+        <dropColumn tableName="bus_navigation" columnName="departure_place"/>
+        <dropColumn tableName="bus_navigation" columnName="arrival_place"/>
+        <dropColumn tableName="bus_navigation" columnName="departure_date"/>
+        <dropColumn tableName="bus_navigation" columnName="travel_time"/>
+    </changeSet>
+    
+    <changeSet id="20240314-drop-station-column" author="Tuğçe Usta">
+        <dropColumn tableName="station" columnName="bus_navigation_id"/>
+    </changeSet>
+
+    <changeSet id="20240314-create-bus_nav_station" author="Tuğçe Usta">
+        <createTable tableName="bus_nav_station" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="pk_bus_nav_station_id" primaryKey="true"/>
+            </column>
+            <column name="station_order" type="int">
+            </column>
+            <column name="arrival_date" type="date">
+            </column>
+            <column name="departure_date" type="date">
+            </column>
+            <column name="bus_navigation_id" type="bigint">
+            </column>
+            <column name="station_id" type="bigint">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="bus_nav_station"
+                                 baseColumnNames="bus_navigation_id"
+                                 constraintName="fk_bus_nav_station_bus_navigation"
+                                 referencedTableName="bus_navigation"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="bus_nav_station"
+                                 baseColumnNames="station_id"
+                                 constraintName="fk_bus_nav_station_station"
+                                 referencedTableName="station"
+                                 referencedColumnNames="id"/>
+        <addAutoIncrement tableName="bus_nav_station" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="20240314-rename-ticket-column-name" author="Tuğçe Usta">
+        <addColumn tableName="ticket">
+            <column name="bus_nav_station_id" type="bigint">
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="ticket"
+                                 baseColumnNames="bus_nav_station_id"
+                                 constraintName="fk_bus_nav_station_ticket"
+                                 referencedTableName="ticket"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="20240311-insert-user_account" author="Tuğçe Usta">
+        <insert tableName="user_account">
+            <column name="id" value="2"/>
+            <column name="name" value="admin"/>
+            <column name="surname" value="admin"/>
+            <column name="username" value="admin"/>
+            <column name="email" value="admin@admin.com"/>
+            <column name="password" value="admin"/>
+            <column name="role" value="ADMIN"/>
+            <column name="gender" value="FEMALE"/>
+        </insert>
+        <insert tableName="user_account">
+            <column name="id" value="3"/>
+            <column name="name" value="companyadmin"/>
+            <column name="surname" value="companyadmin"/>
+            <column name="username" value="companyadmin"/>
+            <column name="email" value="companyadmin@companyadmin.com"/>
+            <column name="password" value="companyadmin"/>
+            <column name="role" value="COMPANY_ADMIN"/>
+            <column name="gender" value="MALE"/>
+        </insert>
+        <insert tableName="user_account">
+            <column name="id" value="4"/>
+            <column name="name" value="itadmin"/>
+            <column name="surname" value="itadmin"/>
+            <column name="username" value="itadmin"/>
+            <column name="email" value="itadmin@itadmin.com"/>
+            <column name="password" value="itadmin"/>
+            <column name="role" value="IT_ADMIN"/>
+            <column name="gender" value="FEMALE"/>
+        </insert>
+        <insert tableName="user_account">
+            <column name="id" value="5"/>
+            <column name="name" value="companyuser"/>
+            <column name="surname" value="companyuser"/>
+            <column name="username" value="companyuser"/>
+            <column name="email" value="companyuser@companyuser.com"/>
+            <column name="password" value="companyuser"/>
+            <column name="role" value="COMPANY_USER"/>
+            <column name="gender" value="FEMALE"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>
