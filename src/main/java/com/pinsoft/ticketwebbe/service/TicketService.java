@@ -48,9 +48,16 @@ public class TicketService extends AbstractBaseService<Ticket,Long> {
         busNavigationRepository.findById(ticketRequest.getBusNavigationId()).isPresent()){
             Optional<User> user = userService.getById(ticketRequest.getUserId());
             BusNavigation busNavigation = busNavigationService.get(ticketRequest.getBusNavigationId());
-            ticket.setBusNavigation(busNavigation);
-            ticket.setUser(user.get());
-            return super.save(ticket);
+
+            if(user.get().getTickets().size() <4){
+                ticket.setBusNavigation(busNavigation);
+                ticket.setUser(user.get());
+                return super.save(ticket);
+            }
+            else{
+                throw new ApiRequestException("One user can purchase up to four tickets.");
+            }
+
         }
         else{
             throw new ApiRequestException("Check busNavigation and user id again!");
@@ -85,4 +92,6 @@ public class TicketService extends AbstractBaseService<Ticket,Long> {
         }
 
     }
+
+
 }
