@@ -314,7 +314,7 @@
 
     <changeSet id="20240319-add_busDesign_column" author="Egemen Derbedek">
         <addColumn tableName="bus">
-            <column name="busDesign" type="varchar(5)"/>
+            <column name="bus_design" type="varchar(5)"/>
         </addColumn>
     </changeSet>
 
