@@ -312,5 +312,10 @@
         </insert>
     </changeSet>
 
+    <changeSet id="20240319-add_busDesign_column" author="Egemen Derbedek">
+        <addColumn tableName="bus">
+            <column name="busDesign" type="varchar(5)"/>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

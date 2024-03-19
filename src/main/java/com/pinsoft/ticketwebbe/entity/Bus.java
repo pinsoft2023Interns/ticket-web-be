@@ -23,6 +23,7 @@ public class Bus {
     private String plate;
     private String driverName;
     private String hostName;
+    private String busDesign;
     private Integer numberOfSeats;
 
     @ManyToOne
