@@ -37,6 +37,7 @@ public class BusService extends AbstractBaseService<Bus,Long>{
         bus.setDriverName(busRequest.getDriverName());
         bus.setHostName(busRequest.getHostName());
         bus.setNumberOfSeats(busRequest.getNumberOfSeats());
+        bus.setBusDesign(busRequest.getBusDesign());
 
         if(companyRepository.findById(busRequest.getCompanyId()).isPresent()){
             Company company = companyService.get(busRequest.getCompanyId());
@@ -56,6 +57,7 @@ public class BusService extends AbstractBaseService<Bus,Long>{
             bus.setDriverName(busUpdateRequest.getDriverName());
             bus.setHostName(busUpdateRequest.getHostName());
             bus.setNumberOfSeats(busUpdateRequest.getNumberOfSeats());
+            bus.setBusDesign(busUpdateRequest.getBusDesign());
 
             Company company = companyService.get(busUpdateRequest.getCompanyId());
             bus.setCompanyId(company);

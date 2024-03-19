@@ -12,4 +12,5 @@ public class TicketRequest {
     private float price;
     private Long userId;
     private Long busNavigationId;
+    private Long busNavStatonId;
 }

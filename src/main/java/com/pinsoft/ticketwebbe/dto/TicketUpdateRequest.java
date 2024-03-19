@@ -13,6 +13,7 @@ public class TicketUpdateRequest {
     private float price;
     private Long userId;
     private Long busNavigationId;
+    private Long busNavStatonId;
     private boolean isActive;
     private boolean isCanceled;
 }
