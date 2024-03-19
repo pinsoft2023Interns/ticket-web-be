@@ -2,10 +2,13 @@ package com.pinsoft.ticketwebbe.service;
 
 import com.pinsoft.ticketwebbe.dto.TicketRequest;
 import com.pinsoft.ticketwebbe.dto.TicketUpdateRequest;
+import com.pinsoft.ticketwebbe.entity.BusNavStation;
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Ticket;
 import com.pinsoft.ticketwebbe.entity.User;
+import com.pinsoft.ticketwebbe.enums.Permission;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
+import com.pinsoft.ticketwebbe.repository.BusNavStationRepository;
 import com.pinsoft.ticketwebbe.repository.BusNavigationRepository;
 import com.pinsoft.ticketwebbe.repository.TicketRepository;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
@@ -13,7 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TicketService extends AbstractBaseService<Ticket,Long> {
@@ -33,6 +40,12 @@ public class TicketService extends AbstractBaseService<Ticket,Long> {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    BusNavStationService busNavStationService;
+
+    @Autowired
+    BusNavStationRepository busNavStationRepository;
+
     protected JpaRepository<Ticket, Long> getRepository() {
         return ticketRepository;
     }
@@ -45,19 +58,15 @@ public class TicketService extends AbstractBaseService<Ticket,Long> {
         ticket.setSeatInfo(ticketRequest.getSeatInfo());
 
         if(userRepository.findById(ticketRequest.getUserId()).isPresent() &&
-        busNavigationRepository.findById(ticketRequest.getBusNavigationId()).isPresent()){
+                busNavigationRepository.findById(ticketRequest.getBusNavigationId()).isPresent()&&
+                busNavStationRepository.findById(ticketRequest.getBusNavStatonId()).isPresent()){
             Optional<User> user = userService.getById(ticketRequest.getUserId());
             BusNavigation busNavigation = busNavigationService.get(ticketRequest.getBusNavigationId());
-
-            if(user.get().getTickets().size() <4){
-                ticket.setBusNavigation(busNavigation);
-                ticket.setUser(user.get());
-                return super.save(ticket);
-            }
-            else{
-                throw new ApiRequestException("One user can purchase up to four tickets.");
-            }
-
+            ticket.setBusNavigation(busNavigation);
+            ticket.setUser(user.get());
+            BusNavStation busNavStation= busNavStationService.get(ticketRequest.getBusNavStatonId());
+            ticket.setBusNavStation(busNavStation);
+            return super.save(ticket);
         }
         else{
             throw new ApiRequestException("Check busNavigation and user id again!");
@@ -74,11 +83,14 @@ public class TicketService extends AbstractBaseService<Ticket,Long> {
             ticket.setCanceled(ticketUpdateRequest.isCanceled());
 
             if(userRepository.findById(ticketUpdateRequest.getUserId()).isPresent() &&
-            busNavigationRepository.findById(ticketUpdateRequest.getBusNavigationId()).isPresent()){
+                    busNavigationRepository.findById(ticketUpdateRequest.getBusNavigationId()).isPresent()&&
+                    busNavStationRepository.findById(ticketUpdateRequest.getBusNavStatonId()).isPresent()){
                 User user= userService.getById(ticketUpdateRequest.getUserId()).get();
                 ticket.setUser(user);
                 BusNavigation busNavigation= busNavigationService.get(ticketUpdateRequest.getBusNavigationId());
                 ticket.setBusNavigation(busNavigation);
+                BusNavStation busNavStation= busNavStationService.get(ticketUpdateRequest.getBusNavStatonId());
+                ticket.setBusNavStation(busNavStation);
                 return ticketRepository.save(ticket);
             }
             else{
@@ -90,8 +102,31 @@ public class TicketService extends AbstractBaseService<Ticket,Long> {
         else {
             throw new ApiRequestException("the given id is not exist!");
         }
-
     }
 
+    public Ticket cancelTicket(TicketUpdateRequest ticketUpdateRequest, Long ticketId) {
+        Optional<Ticket> optionalTicket = ticketRepository.findById(ticketId);
 
+        if (optionalTicket.isPresent()) {
+            Ticket ticket = optionalTicket.get();
+
+            LocalDateTime departureDate = ticket.getBusNavStation().getDepartureDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+            LocalDateTime now = LocalDateTime.now();
+
+            long minutesUntilDeparture = ChronoUnit.MINUTES.between(now, departureDate);
+
+            Set<Permission> userPermissions = ticket.getUser().getRole().getPermissions();
+
+            if (minutesUntilDeparture < 30 && userPermissions.contains(Permission.COMPANY_USER)) {
+                throw new ApiRequestException("Biletin iptal edilmesi için izniniz yok.");
+            }
+
+            ticket.setCanceled(true);
+            return ticketRepository.save(ticket);
+        }
+        else {
+            throw new ApiRequestException("Belirtilen bilet bulunamadı!");
+        }
+    }
 }

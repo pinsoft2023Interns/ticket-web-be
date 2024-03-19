@@ -11,6 +11,7 @@ public class BusRequest {
     private String plate;
     private String driverName;
     private String hostName;
+    private String busDesign;
     private Long companyId;
     private int numberOfSeats;
 }
