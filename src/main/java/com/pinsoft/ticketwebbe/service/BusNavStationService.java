@@ -9,27 +9,24 @@ import com.pinsoft.ticketwebbe.repository.BusNavStationRepository;
 import com.pinsoft.ticketwebbe.repository.BusNavigationRepository;
 import com.pinsoft.ticketwebbe.repository.StationRepository;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class BusNavStationService extends AbstractBaseService<BusNavStation,Long> {
-    @Autowired
+
     @Getter
-    private BusNavStationRepository busNavStationRepository;
+    private final BusNavStationRepository busNavStationRepository;
 
-    @Autowired
-    StationRepository stationRepository;
+    private final StationRepository stationRepository;
 
-    @Autowired
-    StationService stationService;
+    private final StationService stationService;
 
-    @Autowired
-    BusNavigationRepository busNavigationRepository;
+    private final BusNavigationRepository busNavigationRepository;
 
-    @Autowired
-    BusNavigationService busNavigationService;
+    private final BusNavigationService busNavigationService;
 
     @Override
     protected JpaRepository<BusNavStation, Long> getRepository(){

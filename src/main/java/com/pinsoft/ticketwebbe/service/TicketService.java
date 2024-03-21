@@ -12,7 +12,7 @@ import com.pinsoft.ticketwebbe.repository.BusNavStationRepository;
 import com.pinsoft.ticketwebbe.repository.BusNavigationRepository;
 import com.pinsoft.ticketwebbe.repository.TicketRepository;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,22 +23,17 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class TicketService extends AbstractBaseService<Ticket,Long> {
+    private final TicketRepository ticketRepository;
 
-    @Autowired
-    private TicketRepository ticketRepository;
+    private final BusNavigationService busNavigationService;
 
-    @Autowired
-    BusNavigationService busNavigationService;
+    private final BusNavigationRepository busNavigationRepository;
 
-    @Autowired
-    BusNavigationRepository busNavigationRepository;
+    private final UserService userService;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     BusNavStationService busNavStationService;

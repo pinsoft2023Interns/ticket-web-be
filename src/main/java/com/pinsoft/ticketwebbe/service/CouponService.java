@@ -7,22 +7,21 @@ import com.pinsoft.ticketwebbe.entity.User;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.CouponRepository;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CouponService extends AbstractBaseService<Coupon,Long> {
-    @Autowired
-    private CouponRepository couponRepository;
 
-    @Autowired
-    private UserService userService;
+    private final CouponRepository couponRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
+
+    private final UserRepository userRepository;
 
     @Override
     protected JpaRepository<Coupon, Long> getRepository() {
