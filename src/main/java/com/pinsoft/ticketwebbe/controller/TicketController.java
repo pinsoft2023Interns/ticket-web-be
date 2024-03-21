@@ -39,7 +39,13 @@ public class TicketController {
     }
 
     @PutMapping("/ticket/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN' , 'COMPANY_ADMIN' , 'COMPANY_USER')")
     public Ticket add(@RequestBody TicketUpdateRequest ticketUpdateRequest){
         return ticketService.update(ticketUpdateRequest);
+    }
+    @PutMapping("/ticket/cancel/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN' , 'COMPANY_ADMIN' , 'COMPANY_USER')")
+    public Ticket cancelTicket(@RequestBody TicketUpdateRequest ticketUpdateRequest, @PathVariable Long id) {
+        return ticketService.cancelTicket(ticketUpdateRequest, id);
     }
 }
