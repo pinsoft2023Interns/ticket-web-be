@@ -8,7 +8,7 @@ import com.pinsoft.ticketwebbe.entity.User;
 import com.pinsoft.ticketwebbe.service.AuthenticationService;
 import com.pinsoft.ticketwebbe.service.UserService;
 import jakarta.annotation.security.PermitAll;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +18,12 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private AuthenticationService authService;
+    private final AuthenticationService authService;
 
     @PostMapping("/register")
     @PermitAll

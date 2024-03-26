@@ -3,7 +3,6 @@ package com.pinsoft.ticketwebbe.controller;
 import com.pinsoft.ticketwebbe.dto.BusNavStationRequest;
 import com.pinsoft.ticketwebbe.entity.BusNavStation;
 import com.pinsoft.ticketwebbe.service.BusNavStationService;
-import com.pinsoft.ticketwebbe.service.BusNavigationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

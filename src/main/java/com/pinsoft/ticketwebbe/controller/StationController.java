@@ -3,21 +3,17 @@ package com.pinsoft.ticketwebbe.controller;
 import com.pinsoft.ticketwebbe.dto.StationRequest;
 import com.pinsoft.ticketwebbe.dto.StationUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.Station;
-import com.pinsoft.ticketwebbe.service.BusNavigationService;
 import com.pinsoft.ticketwebbe.service.StationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @RestController
+@RequiredArgsConstructor
 public class StationController {
 
-    @Autowired
-    StationService stationService;
-
-    @Autowired
-    BusNavigationService busNavigationService;
+    private final StationService stationService;
 
     @GetMapping("/station")
     public Collection<Station> get(){
