@@ -2,23 +2,18 @@ package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.BusNavigationRequest;
 import com.pinsoft.ticketwebbe.dto.BusNavigationUpdateRequest;
-
 import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.service.BusNavigationService;
-import com.pinsoft.ticketwebbe.service.BusService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.Collection;
 
 @RestController
+@RequiredArgsConstructor
 public class BusNavigationController {
-    @Autowired
-    BusNavigationService busNavigationService;
 
-    @Autowired
-    BusService busService;
+    private final BusNavigationService busNavigationService;
 
     @GetMapping("/busnavigation")
     public Collection<BusNavigation> get(){

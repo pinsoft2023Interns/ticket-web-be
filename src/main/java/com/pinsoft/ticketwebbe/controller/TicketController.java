@@ -2,9 +2,9 @@ package com.pinsoft.ticketwebbe.controller;
 
 import com.pinsoft.ticketwebbe.dto.TicketRequest;
 import com.pinsoft.ticketwebbe.dto.TicketUpdateRequest;
-import com.pinsoft.ticketwebbe.entity.*;
+import com.pinsoft.ticketwebbe.entity.Ticket;
 import com.pinsoft.ticketwebbe.service.TicketService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +12,10 @@ import java.util.Collection;
 
 
 @RestController
+@RequiredArgsConstructor
 public class TicketController {
-    @Autowired
-    TicketService ticketService;
+
+    private final TicketService ticketService;
 
     @GetMapping("/ticket")
     @PreAuthorize("hasRole('ADMIN')")

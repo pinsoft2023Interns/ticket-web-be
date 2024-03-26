@@ -4,7 +4,7 @@ import com.pinsoft.ticketwebbe.dto.UserUpdateRequest;
 import com.pinsoft.ticketwebbe.entity.User;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +12,11 @@ import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+
     public void delete(Long id) {
         if (userRepository.findById(id).isEmpty()) {
             throw new ApiRequestException("The given id is not exist!");

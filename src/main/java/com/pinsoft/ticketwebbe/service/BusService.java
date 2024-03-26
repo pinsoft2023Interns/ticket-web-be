@@ -7,7 +7,7 @@ import com.pinsoft.ticketwebbe.entity.Company;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
 import com.pinsoft.ticketwebbe.repository.BusRepository;
 import com.pinsoft.ticketwebbe.repository.CompanyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +15,14 @@ import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class BusService extends AbstractBaseService<Bus,Long>{
 
-    @Autowired
-    private BusRepository busRepository;
+    private final BusRepository busRepository;
 
-    @Autowired
-    private CompanyService companyService;
+    private final CompanyService companyService;
 
-    @Autowired
-    private CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
     @Override
     protected JpaRepository<Bus, Long> getRepository() {

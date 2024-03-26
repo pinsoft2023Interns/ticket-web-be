@@ -2,27 +2,20 @@ package com.pinsoft.ticketwebbe.service;
 
 import com.pinsoft.ticketwebbe.dto.StationRequest;
 import com.pinsoft.ticketwebbe.dto.StationUpdateRequest;
-import com.pinsoft.ticketwebbe.entity.BusNavigation;
 import com.pinsoft.ticketwebbe.entity.Station;
 import com.pinsoft.ticketwebbe.exceptions.ApiRequestException;
-import com.pinsoft.ticketwebbe.repository.BusNavigationRepository;
 import com.pinsoft.ticketwebbe.repository.StationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class StationService extends AbstractBaseService<Station,Long> {
-    @Autowired
-    StationRepository stationRepository;
 
-    @Autowired
-    BusNavigationService busNavigationService;
-
-    @Autowired
-    BusNavigationRepository busNavigationRepository;
+    private final StationRepository stationRepository;
 
     @Override
     protected JpaRepository<Station, Long> getRepository() {
