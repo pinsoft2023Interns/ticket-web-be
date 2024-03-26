@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
@@ -50,37 +52,57 @@ public class TicketService extends AbstractBaseService<Ticket,Long> {
         return ticketRepository;
     }
 
-    public Ticket save(TicketRequest ticketRequest){
+    public Ticket save(TicketRequest ticketRequest) {
         Ticket ticket = new Ticket();
         ticket.setActive(true);
         ticket.setCanceled(false);
         ticket.setPrice(ticketRequest.getPrice());
         ticket.setSeatInfo(ticketRequest.getSeatInfo());
 
-        if(userRepository.findById(ticketRequest.getUserId()).isPresent() &&
-                busNavigationRepository.findById(ticketRequest.getBusNavigationId()).isPresent()&&
-                busNavStationRepository.findById(ticketRequest.getBusNavStatonId()).isPresent()){
+        User user = userRepository.findById(ticketRequest.getUserId()).orElseThrow(() -> new ApiRequestException("Kullanıcı bulunamadı!"));
+        BusNavigation busNavigation = busNavigationService.get(ticketRequest.getBusNavigationId());
+        BusNavStation busNavStation= busNavStationService.get(ticketRequest.getBusNavStatonId());
 
-            Optional<User> user = userService.getById(ticketRequest.getUserId());
-            BusNavigation busNavigation = busNavigationService.get(ticketRequest.getBusNavigationId());
-            BusNavStation busNavStation= busNavStationService.get(ticketRequest.getBusNavStatonId());
+        if (user != null && busNavigation != null && busNavStation != null) {
+            Date departureDate = busNavStation.getDepartureDate();
+            LocalDateTime twoDaysBeforeDeparture = departureDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().minusDays(2);
+            LocalDateTime now = LocalDateTime.now();
 
-            if(user.get().getTickets().size() < 4) {
-                ticket.setBusNavigation(busNavigation);
-                ticket.setUser(user.get());
-                ticket.setBusNavStation(busNavStation);
-                return ticketRepository.save(ticket);
+            if (now.isAfter(twoDaysBeforeDeparture)) {
+                throw new ApiRequestException("Sefer tarihinden 2 gün öncesine kadar rezervasyon yapılabilir.");
             }
-            else {
+
+            if (user.getTickets().size() >= 4) {
                 throw new ApiRequestException("One user can purchase up to four tickets!");
             }
 
-        }
-        else{
+            ticket.setUser(user);
+            ticket.setBusNavigation(busNavigation);
+            ticket.setBusNavStation(busNavStation);
+            Ticket savedTicket = ticketRepository.save(ticket);
+
+            if (!savedTicket.isActive()) {
+                LocalDateTime departureDateTime = busNavStation.getDepartureDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                LocalDateTime oneDayBeforeDeparture = departureDateTime.minusDays(1);
+                LocalDateTime twoDaysAgo = LocalDateTime.now().minusDays(2);
+
+                if (now.isAfter(oneDayBeforeDeparture)) {
+                    System.out.println("Biletinizin kalkışına 1 gün kaldı!");
+                }
+
+                if (departureDateTime.isAfter(twoDaysAgo)) {
+                    savedTicket.setCanceled(true);
+                    ticketRepository.save(savedTicket);
+                    throw new ApiRequestException("Rezervasyonunuz iptal edildi, çünkü satın alınmadı.");
+                }
+            }
+
+            return savedTicket;
+        } else {
             throw new ApiRequestException("Check busNavigation and user id again!");
         }
-
     }
+
     public Ticket update(TicketUpdateRequest ticketUpdateRequest){
 
         if(ticketRepository.findById(ticketUpdateRequest.getId()).isPresent()){
